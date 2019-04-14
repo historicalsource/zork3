@@ -1,3 +1,9 @@
+"SHADOW for
+		     Zork III: The Dungeon Master 
+		 The Great Underground Empire (Part 3)
+	(c) Copyright 1982 Infocom, Inc.  All Rights Reserved.
+"
+
 <ROOM CREEPY-CRAWL
       (IN ROOMS)
       (DESC "Creepy Crawl")
@@ -16,7 +22,7 @@ north, east, south, and southwest.")
       (DESC "Land of Shadow")
       (LDESC
 "You are at the eastern end of a dark, featureless landscape of shallow
-hills.  Paths to the east and southeast re-enter the rock.")
+hills. Paths to the east and southeast re-enter the rock.")
       (FLAGS RLANDBIT)
       (ACTION SHADOW-ROOMS)
       (NE "Towering walls of rock bar your way.")
@@ -52,8 +58,8 @@ passage.")
       (IN ROOMS)
       (DESC "Land of Shadow")
       (LDESC
-"You are in a dark and shadowy land.  All around you are gentle hills and
-eerie shadows.  Far above, shrouded in mist, you can barely make out the
+"You are in a dark and shadowy land. All around you are gentle hills and
+eerie shadows. Far above, shrouded in mist, you can barely make out the
 ceiling of the enormous cavern that spans this entire land.")
       (FLAGS RLANDBIT)
       (ACTION SHADOW-ROOMS)
@@ -71,7 +77,7 @@ ceiling of the enormous cavern that spans this entire land.")
       (IN ROOMS)
       (DESC "Land of Shadow")
       (LDESC
-"You are in an ominously dark land of rolling hills.  The ground becomes
+"You are in an ominously dark land of rolling hills. The ground becomes
 softer to the south.")
       (FLAGS RLANDBIT)
       (ACTION SHADOW-ROOMS)
@@ -88,8 +94,8 @@ softer to the south.")
       (IN ROOMS)
       (DESC "Land of Shadow")
       (LDESC
-"You are at the southern end of a shadowy land.  The ground here is quite
-soft, and the area is surrounded by quicksand on most sides.  North of here
+"You are at the southern end of a shadowy land. The ground here is quite
+soft, and the area is surrounded by quicksand on most sides. North of here
 is a terrain of shallow hills.")
       (FLAGS RLANDBIT)
       (ACTION SHADOW-ROOMS)
@@ -107,9 +113,9 @@ is a terrain of shallow hills.")
       (IN ROOMS)
       (DESC "Land of Shadow")
       (LDESC
-"You are near the southern end of the land of shadow.  The ground here is
-soft and spongy, and it becomes quicksand to the south.  North and east of here
-are gentle, rolling hills.  A gentle sea breeze wafts over a steeply sloping
+"You are near the southern end of the land of shadow. The ground here is
+soft and spongy, and it becomes quicksand to the south. North and east of here
+are gentle, rolling hills. A gentle sea breeze wafts over a steeply sloping
 path to the west.")
       (FLAGS RLANDBIT)
       (ACTION SHADOW-ROOMS)
@@ -129,7 +135,7 @@ path to the west.")
       (DESC "Land of Shadow")
       (LDESC
 "You are in a land of dark shadows and shallow hills, which stretch out in all
-directions.  To the west, the land dips sharply.")
+directions. To the west, the land dips sharply.")
       (FLAGS RLANDBIT)
       (ACTION SHADOW-ROOMS)
       (NE TO SHADOW-2)
@@ -146,12 +152,13 @@ directions.  To the west, the land dips sharply.")
       (IN ROOMS)
       (DESC "Land of Shadow")
       (LDESC
-"You are standing atop a steep cliff, looking west over a vast ocean.  Far
-below, the surf pounds at a sandy beach.  To the south and east are rolling
-hills filled with eerie shadows.  A path cut into the face of the cliff
-descends toward the beach. To the north is a tall stone wall, which ends at the
-cliff edge.  It was obviously built long ago, and directly north is a spot
-where you could climb over the rubble of the decaying wall.")
+"You are standing atop a steep cliff, looking west over a vast ocean.
+Far below, the surf pounds at a sandy beach. To the south and east are
+rolling hills filled with eerie shadows. A path cut into the face of the
+cliff descends toward the beach. To the north is a tall stone wall,
+which ends at the cliff edge. It was obviously built long ago, and
+directly north is a spot where you could climb over the rubble of the
+decaying wall.")
       (FLAGS RLANDBIT)
       (ACTION SHADOW-ROOMS)
       (SOUTH TO SHADOW-7)
@@ -170,7 +177,7 @@ where you could climb over the rubble of the decaying wall.")
       (DESC "Flathead Ocean")
       (FLAGS RLANDBIT ONBIT)
       (NORTH TO CLIFF-BASE)
-      (ENTER "Between the rocks, wind, and waves, you wouldn't last a minute.")
+      (ENTER"Between the rocks, wind, and waves, you wouldn't last a minute.")
       (WEST "Between the rocks, wind, and waves, you wouldn't last a minute.")
       (SW "Between the rocks, wind, and waves, you wouldn't last a minute.")
       (NW "Between the rocks, wind, and waves, you wouldn't last a minute.")
@@ -185,7 +192,7 @@ where you could climb over the rubble of the decaying wall.")
 	(DESC "hooded figure")
 	(SYNONYM SHADOW FIGURE MAN WOMAN)
 	(ADJECTIVE HOODED CLOAKED)
-	(FLAGS VILLAIN VICBIT TRANSBIT CONTBIT OPENBIT)
+	(FLAGS ACTORBIT TRANSBIT CONTBIT OPENBIT)
 	(ACTION SHADOW-F)
 	(DESCFCN SHADOW-F)>
 
@@ -240,12 +247,12 @@ is here." CR>)>
 	       (<HELLO? ,SHADOW>
 		<TELL
 "The hooded figure does not respond to your words." CR>)
-	       (<AND <VERB? ATTACK KILL> <==? ,PRSI ,SWORD>>
+	       (<AND <VERB? ATTACK> <==? ,PRSI ,SWORD>>
 		<COND (<NOT ,SHADOW-POINT-2>
 		       <SETG SCORE <+ ,SCORE 1>>
 		       <SETG SHADOW-POINT-2 T>)>
 		<SHADOW-ATTACK>)
-	       (<VERB? ATTACK KILL>
+	       (<VERB? ATTACK>
 		<TELL
 "The hooded figure ignores your feeble attack." CR>
 		<SETG ATTACK-MODE T>
@@ -287,7 +294,7 @@ is here." CR>)>
 		       <COND (<0? ,S-STRENGTH>
 			      <SHADOW-DIES>
 			      <RTRUE>)>
-		       <TELL <PICK-ONE ,P-HITS> CR>
+		       <TELL <RANDOM-ELEMENT ,P-HITS> CR>
 		       <TELL "The figure" <GET ,SHADOW-DIAG ,S-STRENGTH> CR>)
 		      (T
 		       <SETG S-STRENGTH <- ,S-STRENGTH 2>>
@@ -302,7 +309,7 @@ is here." CR>)>
 		<COND (<L? ,S-STRENGTH 2>
 		       <TELL
 "Your opponent blocks your attack with its sword." CR>)
-		      (T <TELL <PICK-ONE ,P-MISSES> CR>)>)>>
+		      (T <TELL <RANDOM-ELEMENT ,P-MISSES> CR>)>)>>
 
 <GLOBAL P-HITS <LTABLE
 "A good parry! Your sword wounds the hooded figure!"
@@ -320,7 +327,7 @@ down the figure's arm!"
 <GLOBAL S-HITS <LTABLE
 "The hooded figure catches you off guard and wounds you!"
 "You are wounded by a lightning thrust!"
-"Your quick reflexes cannot stop the hooded figure's stroke!  You are hit!">>
+"Your quick reflexes cannot stop the hooded figure's stroke! You are hit!">>
 
 <ROUTINE I-SHADOW-REPLY ()
 	 <COND (<OR <NOT ,ATTACK-MODE> <NOT <IN? ,SHADOW ,HERE>>>
@@ -336,23 +343,23 @@ down the figure's arm!"
 Although you are defenseless, the figure reaches for your sword and hands it
 back to you, nodding grimly." CR>)
 			     (T
-			      <TELL <PICK-ONE ,S-HITS> CR>)>)
+			      <TELL <RANDOM-ELEMENT ,S-HITS> CR>)>)
 		      (T
 		       <COND (<L? <SETG P-STRENGTH <- ,P-STRENGTH 2>> 1>
 			      <JIGS-UP
 "In your wounded state, you cannot defend yourself against your still-quick
-opponent.  Slowly and carefully, the figure starts to remove its hood as you
+opponent. Slowly and carefully, the figure starts to remove its hood as you
 fall to the ground, dead.">)
 			     (T
 			      <TELL
 "A brilliant feint puts you off guard, and the hooded figure slips its
-sword between your ribs.  You are hurt very badly." CR>)>)>)
+sword between your ribs. You are hurt very badly." CR>)>)>)
 	       (<L? ,S-STRENGTH 3>
 		<TELL
 "The hooded figure attempts a thrust, but its weakened state prevents
 hitting you." CR>)
 	       (T
-		<TELL <PICK-ONE ,S-MISSES> CR>)>>
+		<TELL <RANDOM-ELEMENT ,S-MISSES> CR>)>>
 
 <GLOBAL S-MISSES <LTABLE
 "The hooded figure stabs nonchalantly with its sword and misses."
@@ -363,8 +370,8 @@ flying to the ground!">>
 
 <ROUTINE SHADOW-DIES ()
 	 <TELL
-"The hooded figure, fatally wounded, slumps to the ground.  It gazes up at
-you once, and you catch a brief glimpse of deep and sorrowful eyes.  Before
+"The hooded figure, fatally wounded, slumps to the ground. It gazes up at
+you once, and you catch a brief glimpse of deep and sorrowful eyes. Before
 you can react, the figure vanishes in a cloud of fetid vapor." CR>
 	 <REMOVE ,SHADOW>
 	 <SETG SHADOW-GONE T>
@@ -373,16 +380,16 @@ you can react, the figure vanishes in a cloud of fetid vapor." CR>
 <ROUTINE HOOD-F ()
 	 <COND (<AND <VERB? LOOK-UNDER> <IN? ,HOOD ,SHADOW>>
 		<TELL
-"The figure's hood casts a dark shadow over its face.  There is no way from
+"The figure's hood casts a dark shadow over its face. There is no way from
 where you stand to look beneath it." CR>)
-	       (<AND <VERB? TAKE> <IN? ,HOOD ,SHADOW>>
+	       (<AND <VERB? TAKE PUT> <IN? ,HOOD ,SHADOW>>
 		<COND (<==? ,S-STRENGTH 1>
 		       <TELL
 "You slowly remove the hood from your badly wounded opponent and recoil
-in horror at the sight of your own face, weary and wounded.  A faint
+in horror at the sight of your own face, weary and wounded. A faint
 smile comes to the lips and then the face starts to change, very slowly,
-into that of an old, wizened person.  The image fades and with it the body
-of your hooded opponent.  The cloak remains on the ground." CR>
+into that of an old, wizened person. The image fades and with it the body
+of your hooded opponent. The cloak remains on the ground." CR>
 		       <REMOVE ,SHADOW>
 		       <SETG SHADOW-GONE T>
 		       <MOVE ,HOOD ,WINNER>
@@ -403,19 +410,8 @@ force you back." CR>)
 "You cannot get close enough to look underneath the cloak." CR>)
 	       (<AND <VERB? TAKE> <IN? ,CLOAK ,SHADOW>>
 		<TELL
-"The cloak is fastened around the neck of the hooded figure.  It would be
+"The cloak is fastened around the neck of the hooded figure. It would be
 difficult to remove." CR>)>>
-
-<ROUTINE V-DIAGNOSE ()
-	 <TELL <GET ,DIAG ,P-STRENGTH> CR>>
-
-<GLOBAL DIAG <TABLE
-"You are dead."
-"You are very seriously wounded.  One more wound would very likely do you in."
-"You are hurt quite badly.  One major wound would probably kill you."
-"You have a few wounds, which do not seriously impair your strength."
-"You are wounded lightly.  You have a good deal of strength in reserve."
-"You are in perfect health.">>
 
 <GLOBAL BLOCKED-DIR <>>
 
@@ -473,15 +469,15 @@ glowing!" CR>)
 		<RTRUE>)>>
 
 ;" Cooperative Problem"
-y
+
 <ROOM ZORK2-STAIR
       (IN ROOMS)
       (DESC "Endless Stair")
       (LDESC
 "You are at the bottom of a seemingly endless stair, winding its way
-upward beyond your vision.  An eerie light, coming from all around
-you, casts strange shadows on the walls.  To the south is a dark
-and winding trail.")
+upward beyond your vision. An eerie light, coming from all around you,
+casts strange shadows on the walls. To the south is a dark and winding
+trail.")
       (FLAGS ONBIT RLANDBIT)
       (NORTH "The stairs are endless.")
       (UP "The stairs are endless.")
@@ -492,9 +488,10 @@ and winding trail.")
       (IN ROOMS)
       (DESC "Junction")
       (LDESC
-"You are at the junction of a north-south passage and an east-west passage.
-To the north, you can make out the bottom of a stairway.  The ways to the
-east and south are relatively cramped, but a wider trail leads to the west.")
+"You are at the junction of a north-south passage and an east-west
+passage. To the north, you can make out the bottom of a stairway. The
+ways to the east and south are relatively cramped, but a wider trail
+leads to the west.")
       (FLAGS RLANDBIT)
       (WEST TO CLEARING)
       (NORTH TO ZORK2-STAIR)
@@ -505,11 +502,12 @@ east and south are relatively cramped, but a wider trail leads to the west.")
       (IN ROOMS)
       (DESC "Barren Area")
       (LDESC
-"You are west of the junction, where the rock-bound passage widens out into a
-large, flat area. Although the land here is barren, you can see vegetation
-to the west.  South of here is a mighty wall of stone, ancient and crumbling. 
-To the southwest the wall has decayed enough to form an opening, through which
-seeps a thin mist. A trail dips sharply into rocky terrain to the northwest.")
+"You are west of the junction, where the rock-bound passage widens out
+into a large, flat area. Although the land here is barren, you can see
+vegetation to the west. South of here is a mighty wall of stone, ancient
+and crumbling. To the southwest the wall has decayed enough to form an
+opening, through which seeps a thin mist. A trail dips sharply into
+rocky terrain to the northwest.")
       (FLAGS RLANDBIT)
       (SW TO SHADOW-2)
       (NW TO SLOPE)
@@ -524,9 +522,10 @@ seeps a thin mist. A trail dips sharply into rocky terrain to the northwest.")
       (IN ROOMS)
       (DESC "Hairpin Loop")
       (LDESC
-"You are at a sharp turn on a narrow and steeply sloping path, strewn with
-boulders of various sizes.  The path climbs sharply toward a desolate plain to
-the southeast.  Southwest of here the path winds down to the base of a cliff.")
+"You are at a sharp turn on a narrow and steeply sloping path, strewn
+with boulders of various sizes. The path climbs sharply toward a
+desolate plain to the southeast. Southwest of here the path winds down
+to the base of a cliff.")
       (SE TO CLEARING)
       (UP TO CLEARING)
       (SW TO CLIFF-BASE)
@@ -538,9 +537,10 @@ the southeast.  Southwest of here the path winds down to the base of a cliff.")
       (IN ROOMS)
       (DESC "Cliff Base")
       (LDESC
-"You are at the base of a steep cliff.  Directly above you is a wide ledge
-and far above that some natural sunlight can be seen.  To the northeast is a
-steeply climbing path and the ground becomes sandy toward the south.")
+"You are at the base of a steep cliff. Directly above you is a wide
+ledge and far above that some natural sunlight can be seen. To the
+northeast is a steeply climbing path and the ground becomes sandy toward
+the south.")
       (FLAGS ONBIT RLANDBIT)
       (UP "You can't get up the rock face.")
       (SOUTH TO FLATHEAD-OCEAN)
@@ -572,9 +572,9 @@ steeply climbing path and the ground becomes sandy toward the south.")
       (IN ROOMS)
       (DESC "Foggy Room")
       (LDESC
-"You are in a dank passage filled with a wispy fog.  A spooky passageway leads
-north and a wider path heads off to the south.  To the west, the path leaves
-the rock and enters an eerie, shadowy land.")
+"You are in a dank passage filled with a wispy fog. A spooky passageway
+leads north and a wider path heads off to the south. To the west, the
+path leaves the rock and enters an eerie, shadowy land.")
       (NORTH TO CREEPY-CRAWL)
       (SOUTH TO LAKE-SHORE)
       (WEST TO SHADOW-1)
@@ -584,9 +584,10 @@ the rock and enters an eerie, shadowy land.")
       (IN ROOMS)
       (DESC "Lake Shore")
       (LDESC
-"You are in a wide cavern on the north shore of a small lake.  Some polished
-stone steps lead to the southeast and a sheer rock face prevents any movement
-around the lake to the southwest. The cavern is dimly lit from above.")
+"You are in a wide cavern on the north shore of a small lake. Some
+polished stone steps lead to the southeast and a sheer rock face
+prevents any movement around the lake to the southwest. The cavern is
+dimly lit from above.")
       (SE TO AQ-VIEW)
       (DOWN TO AQ-VIEW)
       (SOUTH "If you really want to enter the lake, you should say so.")
@@ -616,10 +617,11 @@ Some stone steps lead up to the northwest.")
       (IN ROOMS)
       (DESC "On the Lake")
       (LDESC
-"You are floating on the surface of the lake.  The water is ice cold and your
-ability to survive here for long is very questionable.  A swim north puts you
-at your starting point.  Conditions to the east are poor where the lake turns
-into swamp.  The west and south shores are suitable for walking, however.")
+"You are floating on the surface of the lake. The water is ice cold and
+your ability to survive here for long is very questionable. A swim north
+puts you at your starting point. Conditions to the east are poor where
+the lake turns into swamp. The west and south shores are suitable for
+walking, however.")
       (NORTH TO LAKE-SHORE)
       (SOUTH TO SOUTH-SHORE)
       (PSEUDO "SWAMP" SWAMP-PSEUDO)
@@ -640,7 +642,7 @@ into swamp.  The west and south shores are suitable for walking, however.")
       (LDESC
 "You are below the surface of the lake. It turns out that the lake is quite
 shallow and the bottom is only a few feet below you. Considering the frigid
-temperature of the water, you should probably not plan an extended stay. 
+temperature of the water, you should probably not plan an extended stay.
 The lake bottom is sandy and a few hearty plants and algae live there.")
       (UP TO ON-LAKE)
       (DOWN "You are already at the bottom of the lake.")
@@ -660,8 +662,8 @@ The lake bottom is sandy and a few hearty plants and algae live there.")
       (IN ROOMS)
       (DESC "Western Shore")
       (LDESC
-"You are on the western shore of the lake.  The ground here is quite
-hard, but a few sickly reeds manage to grow near the water's edge.  The
+"You are on the western shore of the lake. The ground here is quite
+hard, but a few sickly reeds manage to grow near the water's edge. The
 only path leads into the rock to the south.")
       (EAST "If you want to enter the lake, you should say so.")
       (SOUTH TO VIEW-ROOM)
@@ -846,7 +848,7 @@ the wind." CR>
 	 <COND (<AND <VERB? BURN> <==? ,PRSI ,TORCH>>
 		<REMOVE ,PRSO>
 		<JIGS-UP
-"The staff is instantly consumed in a ball of flame.  You along with it.">)>>
+"The staff is instantly consumed in a ball of flame. You along with it.">)>>
 
 <OBJECT CHEST
 	(IN CLIFF-LEDGE)
@@ -864,13 +866,13 @@ the wind." CR>
 	(IN LOCAL-GLOBALS)
 	(DESC "man")
 	(SYNONYM MAN FRIEND)
-	(FLAGS VICBIT)
+	(FLAGS ACTORBIT)
 	(ACTION GLOBAL-MAN-F)>
 	
 <OBJECT VALUABLES
 	(IN MAN)
 	(DESC "pile of assorted valuables")
-       	(SYNONYM VALUABLES TREASU PILE)
+       	(SYNONYM VALUABLES TREASURE PILE)
 	(ADJECTIVE ASSORTED)
 	(FLAGS NDESCBIT TAKEBIT)
 	(ACTION VALUABLES-F)>
@@ -878,7 +880,7 @@ the wind." CR>
 <OBJECT MAN
 	(SYNONYM MAN FRIEND)
 	(DESC "man")
-	(FLAGS VILLAIN VICBIT OPENBIT CONTBIT)
+	(FLAGS ACTORBIT OPENBIT CONTBIT)
 	(ACTION MAN-F)>
 
 <GLOBAL CHEST-LIFTED <>>
@@ -907,8 +909,8 @@ He leaves your sight." CR>
 "At the edge of the cliff above you, a man appears. He looks down at
 you and speaks. \"Hello, down there! You seem to have a problem. Maybe I
 can help you.\" He chuckles in an unsettling sort of way. \"Perhaps if you
-tied that chest to the end of the rope I might be able to drag it up for you. 
-Then, I'll be more than happy to help you up!\"  He laughs again." CR>
+tied that chest to the end of the rope I might be able to drag it up for you.
+Then, I'll be more than happy to help you up!\" He laughs again." CR>
 		<SETG MAN-FLAG T>
 		<SETG MAN-SEEN T>
 		<ENABLE <QUEUE I-MAN-PRESENT -1>>)>>
@@ -929,7 +931,7 @@ can always help me! See you around, sport!\" He disappears." CR>
 		<QUEUE I-MAN-PRESENT 0>
 		<SETG MAN-FLAG <>>
 		<RTRUE>)
-	       (T <TELL <PICK-ONE ,MAN-WAITS> CR>)>>
+	       (T <TELL <RANDOM-ELEMENT ,MAN-WAITS> CR>)>>
 
 <ROUTINE CLIFF-BASE-F (RARG)
 	 <COND (<AND <==? .RARG ,M-ENTER>
@@ -943,10 +945,10 @@ can always help me! See you around, sport!\" He disappears." CR>
 "Your friend at the cliff top has started pacing nervously around."
 "\"Yoo hoo!\" calls the man at the brink of the cliff. \"Remember me?\""
 "The man on the cliff waves at you. \"It would just take a moment to tie that
-rope to the chest.  I'd be much obliged, and there might even be something in
+rope to the chest. I'd be much obliged, and there might even be something in
 it for you!\""
-"A few small stones fall near your feet.  You look up and see your friend
-waving.  \"I haven't got all day, fella.  Be a pal and pass up the chest!\""
+"A few small stones fall near your feet. You look up and see your friend
+waving. \"I haven't got all day, fella. Be a pal and pass up the chest!\""
 "The man on the cliff clears his throat loudly. \"I don't mean to be rushing
 you, but I do have some pressing engagements....\"">>
 
@@ -961,7 +963,7 @@ you, but I do have some pressing engagements....\"">>
 		     <IN? ,CHEST ,WINNER>
 		     ,CHEST-TIED>
 		<TELL
-"You can't go anywhere holding that chest.  The rope is tied around it!" CR>)
+"You can't go anywhere holding that chest. The rope is tied around it!" CR>)
 	       (<AND <==? .RARG ,M-ENTER>
 		     <NOT ,MAN-SEEN>
 		     <NOT ,MAN-FLAG>
@@ -972,8 +974,8 @@ you, but I do have some pressing engagements....\"">>
 		<ENABLE <QUEUE I-MAN-APPEARS 5>>)
 	       (<==? .RARG ,M-LOOK>
 		<TELL
-"This is a rock-strewn ledge near the base of a tall cliff.  The bottom of the
-cliff is another fifteen feet below.  You have little hope of climbing up the
+"This is a rock-strewn ledge near the base of a tall cliff. The bottom of the
+cliff is another fifteen feet below. You have little hope of climbing up the
 cliff face, but you might be able to scramble down from here (though it's
 doubtful you could return)." CR>
 		<COND (,ROPE-FLAG
@@ -1021,6 +1023,8 @@ trees." CR>)
 <ROUTINE GLOBAL-ROPE-F ()
 	 <COND (<NOT ,ROPE-FLAG>
 		<TELL "You can't see any rope here." CR>)
+	       (<VERB? CLIMB-FOO>
+		<V-CLIMB-UP ,P?DOWN T>)
 	       (<VERB? TAKE MOVE CLIMB-ON>
 		<COND (<NOT ,MAN-FLAG>
 		       <TELL
@@ -1063,7 +1067,7 @@ disappears. \"I'll be back in a short while!\" are his last words." CR>
 "\"Just grab onto it!\", the man bellows." CR>)
 			     (,MAN-FLAG
 			      <TELL
-"The man looks cross.  \"I want the chest, not you!\" he snaps.  \"Now stop
+"The man looks cross. \"I want the chest, not you!\" he snaps. \"Now stop
 fooling around and pass it up!\"" CR>)
 			     (T
 			      <TELL
@@ -1145,13 +1149,17 @@ gravel, he disappears from sight." CR>
 		<COND (<AND <VERB? TIE> <==? ,ROPE ,PRSO ,PRSI>>
 		       <TELL "What's the point?" CR>)
 		      (<AND <VERB? PUT> <EQUAL? ,PRSO ,STAFF ,LAMP ,TORCH>>
-		       <TELL "It doesn't fit." CR>)
+		       <TELL "It doesn't fit.">
+		       <COND (<EQUAL? ,PRSO ,STAFF>
+			      <TELL
+" Awfully peculiar, though, since it's where the staff came from.">)>
+		       <CRLF>)
 		      (T <RFALSE>)>)
 	       (<VERB? OPEN UNLOCK>
 		<COND (,MAN-FLAG
 		       <TELL
-"The man calls down to you.  \"Is this what you're looking for?\" he cackles,
-waving a small key over his head.  You try to open the chest, but it is
+"The man calls down to you. \"Is this what you're looking for?\" he cackles,
+waving a small key over his head. You try to open the chest, but it is
 locked." CR>)
 		      (T <TELL
 "The chest is locked and cannot be opened." CR>)>)>>
@@ -1183,7 +1191,7 @@ sight." CR>
 <ROUTINE MAN-F ()
 	 <COND (<VERB? HELLO>
 		<TELL
-"He responds cheerfully.  \"It is a wonderful day, isn't it?\"" CR>)
+"He responds cheerfully. \"It is a wonderful day, isn't it?\"" CR>)
 	       (<HELLO? ,MAN>
 		<TELL
 "The man is thoroughly engrossed in the examination of his booty and
@@ -1191,19 +1199,19 @@ doesn't seem to hear you." CR>)
 	       (<VERB? EXAMINE>
 		<TELL
 "The man is stocky and of medium height, with several days' growth of stubble
-on his face.  He is carrying a number of valuables under his arm, presumably
+on his face. He is carrying a number of valuables under his arm, presumably
 from the now-open chest." CR>)
-	       (<VERB? ATTACK KILL>
+	       (<VERB? ATTACK>
 		<COND (<==? ,PRSI ,SWORD>
 		       <TELL
-"The man is taken by surprise and is hit with the sword.  He grabs you
+"The man is taken by surprise and is hit with the sword. He grabs you
 and throws you to the ground">
 		       <COND (<EQUAL? <LOC ,STAFF> ,WINNER ,HERE>
 			      <TELL ", breaking the staff in the process">
 			      <REMOVE ,STAFF>
 			      <MOVE ,BROKEN-STAFF ,HERE>)>
 		       <TELL ", but you
-finish him off with a quick thrust to the chest.  He dies, and disappears
+finish him off with a quick thrust to the chest. He dies, and disappears
 without ceremony in the usual style of the Great Underground Empire.
 His assorted valuables remain behind." CR>
 		       <REMOVE ,MAN>
@@ -1214,10 +1222,10 @@ His assorted valuables remain behind." CR>
 		      (T <TELL "You wouldn't hurt him with that!" CR>)>)>>
 
 <ROUTINE VALUABLES-F ()
-	 <COND (<AND <VERB? TAKE MOVE> <IN? ,MAN ,CLIFF>>
+	 <COND (<AND <VERB? TAKE PUT MOVE> <IN? ,MAN ,CLIFF>>
 		<TELL
-"The man recoils sharply. \"These here things are mine.  It's my chest and
-they're my valuables.  You've a lot of nerve trying to take them from me
+"The man recoils sharply. \"These here things are mine. It's my chest and
+they're my valuables. You've a lot of nerve trying to take them from me
 after me saving you like that!\"" CR>)>>
 
 <ROUTINE ROPE-F ()
@@ -1225,6 +1233,8 @@ after me saving you like that!\"" CR>)>>
 		<COND (,ROPE-FLAG
 		       <TELL
 "The rope is tied to a tree." CR>)>)
+	       (<VERB? CLIMB-FOO>
+		<V-CLIMB-UP ,P?DOWN T>)
 	       (<VERB? BURN>
 		<TELL
 "The rope won't catch fire." CR>)
@@ -1257,18 +1267,18 @@ after me saving you like that!\"" CR>)>>
 "He yells back, \"What's that you say? I can't hear you very well.">
 		<COND (<NOT ,CHEST-LIFTED>
 		       <TELL
-" Just tie the rope to the chest and we can chat afterwards!\"  He smiles
+" Just tie the rope to the chest and we can chat afterwards!\" He smiles
 broadly.">)
 		      (T <TELL "\"">)>
 		<CRLF>)
-	       (<VERB? KILL ATTACK MUNG>
+	       (<VERB? ATTACK MUNG>
 		<TELL
 "I don't think you'll succeed at this distance." CR>)
 	       (<AND <VERB? THROW> <==? ,PRSI ,GLOBAL-MAN> <IN? ,PRSO ,WINNER>>
 		<TELL
-"The " D ,PRSO " flies upward, but not nearly far enough to hit the man.  It
+"The " D ,PRSO " flies upward, but not nearly far enough to hit the man. It
 does seem to amuse him, however, especially as it passes within inches of
-your head.  \"We're wasting time now.  Be a good fellow and tie the rope!\"" CR>
+your head. \"We're wasting time now. Be a good fellow and tie the rope!\"" CR>
 		<MOVE ,PRSO ,HERE>)>>
 
 <ROUTINE LAKE-F ()
@@ -1391,11 +1401,11 @@ its mouth gaping wide!" CR>
 		<RFALSE>)
 	       (<==? ,LAKE-TIME 4>
 		<TELL
-"The icy waters are taking their toll.  You will not be able to hold out
+"The icy waters are taking their toll. You will not be able to hold out
 much longer." CR>)
 	       (<==? ,LAKE-TIME 6>
 		<TELL
-"You are becoming very weak.  You had better leave the water before you
+"You are becoming very weak. You had better leave the water before you
 drown!" CR>)
 	       (<==? ,LAKE-TIME 8>
 		<QUEUE I-ON-LAKE 0>
@@ -1416,11 +1426,10 @@ drown!" CR>)
 		<COND (<PROB 50>
 		       <REMOVE ,SHINY-OBJECT>
 		       <MOVE ,AMULET ,WINNER>
-		       <SETG P-IT-OBJECT ,AMULET>
-		       <SETG P-IT-LOC ,HERE>
+		       <THIS-IS-IT ,AMULET>
 		       <FCLEAR ,AMULET ,NDESCBIT>
 		       <TELL
-"You reach the shiny object.  It is a simple golden amulet!" CR>)
+"You reach the shiny object. It is a simple golden amulet!" CR>)
 		      (T
 		       <TELL
 "The shiny object slips from your grasp and back onto the floor of
@@ -1484,9 +1493,9 @@ and algae." CR>)
 north. Mounted on one wall is a table labelled \"Scenic Vista,\" whose
 featureless surface is angled toward you. One might believe that the table
 was used to indicate points of interest in the view from this spot, like those
-found in many parks.  On the other hand, your surroundings are far from
+found in many parks. On the other hand, your surroundings are far from
 spacious and by no stretch of the imagination could this spot be considered
-scenic.  An indicator above the table reads \"">
+scenic. An indicator above the table reads \"">
 		<TELL <GET ,VIEW-ROMANS ,ACTIVE-VIEW> "\"." CR>)>>
 		
 <GLOBAL VIEW-ROMANS <TABLE 0 "I" "II" "III" "IV">>
@@ -1496,10 +1505,10 @@ scenic.  An indicator above the table reads \"">
 <GLOBAL VIEW-ROOMS <LTABLE TIMBER-ROOM ROOM-8 DAMP-PASSAGE ZORK-IV>>
 
 <GLOBAL VIEWS <LTABLE
-"You see a passage cluttered with broken timbers.  An extremely narrow opening
+"You see a passage cluttered with broken timbers. An extremely narrow opening
 can be seen at the end of the room."
-"You see a tiny room with rough walls.  Chiseled crudely on one wall is the
-number \"8\".  The only apparent exit seems to be a blur."
+"You see a tiny room with rough walls. Chiseled crudely on one wall is the
+number \"8\". The only apparent exit seems to be a blur."
 "You see a wide room with two nearly identical passages leading east and
 northeast. A wide channel descends steeply into the room and seems to be
 blocked by rubble."
@@ -1553,7 +1562,7 @@ blood of human sacrifice, its velvet covers stained and encrusted with gore.">>
 
 <ROUTINE FRIED-TORCH-F ()
 	 <COND (<VERB? LAMP-ON>
-		<TELL "It's hopeless.  The torch is wet." CR>)>>
+		<TELL "It's hopeless. The torch is wet." CR>)>>
 
 <ROUTINE TORCH-F ()
 	 <COND (<VERB? LAMP-ON>
@@ -1578,8 +1587,8 @@ blood of human sacrifice, its velvet covers stained and encrusted with gore.">>
 <ROOM LADDER-TOP	;"was TLADD"
       (IN ROOMS)
       (LDESC
-"This is a very small room.  In the corner is a rickety wooden
-ladder, leading downward.  It might be safe to descend.  There is
+"This is a very small room. In the corner is a rickety wooden
+ladder, leading downward. It might be safe to descend. There is
 also a staircase leading upward.")
       (DESC "Ladder Top")
       (DOWN TO LADDER-BOTTOM)
@@ -1596,8 +1605,8 @@ also a staircase leading upward.")
 <ROOM LADDER-BOTTOM	;"was BLADD"
       (IN ROOMS)
       (LDESC
-"This is a rather wide room.  On one side is the bottom of a
-narrow wooden ladder.  To the west and the south are passages
+"This is a rather wide room. On one side is the bottom of a
+narrow wooden ladder. To the west and the south are passages
 leaving the room.")
       (DESC "Ladder Bottom")
       (SOUTH TO DEAD-END-5)
@@ -1618,8 +1627,8 @@ There is a small pile of coal here.")
       (IN ROOMS)
       (LDESC
 "This is a long and narrow passage, which is cluttered with broken
-timbers.  A wide passage comes from the east and turns at the
-west end of the room into a very narrow passageway.  From the west
+timbers. A wide passage comes from the east and turns at the
+west end of the room into a very narrow passageway. From the west
 comes a strong draft.")
       (DESC "Timber Room")
       (EAST TO LADDER-BOTTOM)
@@ -1663,7 +1672,7 @@ comes a strong draft.")
       (IN ROOMS)
       (LDESC
 "This is a small chamber carved out of the rock at the end of a short crawl.
-On the wall is crudely chiseled the number \"8\".  The only apparent exit,
+On the wall is crudely chiseled the number \"8\". The only apparent exit,
 to the east, seems to be a blur and a loud, whirring sound resounds through
 the rock.")
       (DESC "Room 8")
@@ -1712,7 +1721,6 @@ Duration of effect is unpredictable. Use only in place of death!|
 "The spray smells like a mixture of old socks and burning rubber. If
 I were a grue I'd sure stay clear!" CR>)>)>>
 
-<GLOBAL SPRAYED? <>>
 <GLOBAL SPRAY-USED? <>>
 
 <ROUTINE I-SPRAY ()
@@ -1731,19 +1739,18 @@ I were a grue I'd sure stay clear!" CR>)>)>>
 	 <COND (<==? .RARG ,M-ENTER>
 		<JIGS-UP
 "Sacrificial Altar|
-This is the interior of a huge temple of primitive construction.  A few
-flickering torches cast a sallow illumination over the altar, which is still
-drenched with the blood of human sacrifice.  Behind the altar is an enormous
-statue of a demon which seems to reach towards you with dripping fangs and
-razor-sharp talons.  A low noise begins behind you, and you turn to see
-hundreds of hunched and hairy shapes.  A guttural chant issues from their
-throats.  Near you stands a figure draped in a robe of deepest black,
-brandishing a huge sword. The chant grows louder as the robed figure
-approaches the altar.
-The large figure spots you and approaches menacingly. He reaches into his
-cloak and pulls out a great, glowing dagger. He pulls you onto the altar, and
-with a murmur of approval from the throng, he slices you neatly across your
-abdomen.">)>>
+This is the interior of a huge temple of primitive construction. A few
+flickering torches cast a sallow illumination over the altar, which is
+still drenched with the blood of human sacrifice. Behind the altar is an
+enormous statue of a demon which seems to reach towards you with
+dripping fangs and razor-sharp talons. A low noise begins behind you,
+and you turn to see hundreds of hunched and hairy shapes. A guttural
+chant issues from their throats. Near you stands a figure draped in a
+robe of deepest black, brandishing a huge sword. The chant grows louder
+as the robed figure approaches the altar. The large figure spots you and
+approaches menacingly. It reaches into its cloak and pulls out a great,
+glowing dagger. It pulls you onto the altar and, with a murmur of
+approval from the throng, slices you neatly across your abdomen.">)>>
 
 ;"Last Section"
 
@@ -1751,9 +1758,9 @@ abdomen.">)>>
       (IN ROOMS)
       (DESC "Southern Shore")
       (LDESC
-"You are on the south shore of the lake.  Rock formations prevent
+"You are on the south shore of the lake. Rock formations prevent
 movement to the west and thickening swamp to the east makes the going
-all but impossible.  To the south, where the beach meets a rock
+all but impossible. To the south, where the beach meets a rock
 formation, you can make out a dark passage sloping steeply upward into the
 rock.")
       (EAST "The swamp is too thick.")
@@ -1797,8 +1804,8 @@ rock.")
       (UP "The hole is too far above your head.")
       (LDESC
 "You are in a wide stone channel, part of the water supply system for the
-Great Underground Empire.  The source of water was a waterfall to the south,
-which has long since dried up.  Water flowed along the aqueduct to the north.
+Great Underground Empire. The source of water was a waterfall to the south,
+which has long since dried up. Water flowed along the aqueduct to the north.
 This region is lit from above, although the source of light is not apparent.")
       (SOUTH "You can't climb the dried-up waterfall.")
       (NORTH TO AQ-2)
@@ -1851,7 +1858,7 @@ This region is lit from above, although the source of light is not apparent.")
 <ROUTINE AQUEDUCT-F ()
 	 <COND (<VERB? EXAMINE>
 		<TELL
-"The aqueduct is large and impressive.  It was probably the major method
+"The aqueduct is large and impressive. It was probably the major method
 of water transport in the Empire." CR>)
 	       (<VERB? LEAP>
 		<JIGS-UP
@@ -1867,7 +1874,7 @@ of water transport in the Empire." CR>)
 "Getting into the channel wouldn't be of much use." CR>)
 		      (T
 		       <TELL
-"You're standing in it.  Otherwise, you would be floating in midair above some
+"You're standing in it. Otherwise, you would be floating in midair above some
 very nasty rocks." CR>)>)>>
 
 <ROUTINE MOSS-F ()
@@ -1878,10 +1885,10 @@ very nasty rocks." CR>)>)>>
 	 <COND (<==? .RARG ,M-LOOK>
 		<TELL
 "You are now on one of the tallest arches of the aqueduct, hundreds of feet
-above a rocky chasm.  The immensity of the aqueduct project is apparent from
-here.  Stone supports rise from the rock floor to form massive arches, which
-traverse the region from north to south.  The water-carrying channel here is
-wide and deep.  To the west and far below, you can make out a balcony which
+above a rocky chasm. The immensity of the aqueduct project is apparent from
+here. Stone supports rise from the rock floor to form massive arches, which
+traverse the region from north to south. The water-carrying channel here is
+wide and deep. To the west and far below, you can make out a balcony which
 must command a wide view of the aqueduct." CR>
 		<COND (<NOT ,AQ-FLAG>
 		       <TELL
@@ -1891,10 +1898,10 @@ crumbled, casting the arch into the chasm." CR>)>)>>
 <ROUTINE AQ-3-F (RARG)
 	 <COND (<==? .RARG ,M-LOOK>
 		<TELL
-"You are near the northern end of this segment of the aqueduct system.  To the
+"You are near the northern end of this segment of the aqueduct system. To the
 south and slightly uphill, the bulk of the aqueduct looms ominously, towering
-above a gorge.  To the north, the water channel drops precipitously and enters
-a rocky hole.  The damp moss and lichen would certainly make that a one-way
+above a gorge. To the north, the water channel drops precipitously and enters
+a rocky hole. The damp moss and lichen would certainly make that a one-way
 trip." CR>
 		<COND (<NOT ,AQ-FLAG>
 		       <TELL
@@ -1926,7 +1933,7 @@ darkness." CR>
 <ROUTINE KEY-ROOM-F (RARG)
 	 <COND (<==? .RARG ,M-LOOK>
 		<TELL
-"You are between some rock and a dark place, The room is lit dimly from
+"You are between some rock and a dark place. The room is lit dimly from
 above, revealing a lone, dark path sloping down to the west." CR>
 		<COND (,COVER-MOVED
 		       <TELL
@@ -1952,7 +1959,7 @@ a single key is lying in the dust.")
 		<COND (<AND <==? ,PRSO ,BRONZE-DOOR> <==? ,HERE ,GOOD-CELL>>
 		       <COND (,BRONZE-DOOR-LOCKED
 			      <TELL
-"The key seems to mold itself to the shape of the lock.  With a mere
+"The key seems to mold itself to the shape of the lock. With a mere
 twist of your hand, the massive bolt gives way." CR>)
 			     (T <TELL "It already is." CR>)>
 		       <SETG BRONZE-DOOR-LOCKED <>>
@@ -1966,9 +1973,9 @@ twist of your hand, the massive bolt gives way." CR>)
 "The key, which initially seemed certain to fit the lock, seems to change
 shape and will not enter the keyhole." CR>)>)
 	       (<VERB? EXAMINE>
-		<TELL <PICK-ONE ,KEY-DESCS> CR>
+		<TELL <RANDOM-ELEMENT ,KEY-DESCS> CR>
 		<TELL
-"Strange, though.  The key seems to change shape constantly." CR>)>>
+"Strange, though. The key seems to change shape constantly." CR>)>>
 
 <GLOBAL KEY-DESCS <LTABLE
 "The key is a long and heavy skeleton key."
@@ -1999,7 +2006,7 @@ shape and will not enter the keyhole." CR>)>)
 legend among adventurers. Few were known to have arrived at this spot, and
 fewer to return. There is a heavy surf and a breeze is blowing on-shore.
 The land rises steeply to the east and quicksand prevents movement to the
-south. A thick mist covers the ocean and extends over the hills to the east. 
+south. A thick mist covers the ocean and extends over the hills to the east.
 A path heads north along the beach." CR>
 		<COND (<NOT <FSET? ,VIKING-SHIP ,INVISIBLE>>
 		       <TELL
@@ -2014,26 +2021,9 @@ sailor at the helm." CR>)>
 		<ENABLE <QUEUE I-BOAT-DISAPPEAR 2>>
 		<TELL
 "Passing alongside the shore now is an old boat, reminiscent of an ancient
-Viking ship.  Standing on the prow of the ship is an old and crusty sailor,
+Viking ship. Standing on the prow of the ship is an old and crusty sailor,
 peering out over the misty ocean." CR>
 		<FCLEAR ,VIKING-SHIP ,INVISIBLE>)>>
-
-<ROUTINE SAILOR-F ()
-	 <COND (<VERB? HELLO>
-		<COND (<NOT <FSET? ,VIKING-SHIP ,INVISIBLE>>
-		       <TELL
-"The seaman looks up and maneuvers the boat toward shore. He cries out \"I
-have waited three ages for someone to say those words and save me from
-sailing this endless ocean. Please accept this gift. You may find it
-useful!\" He throws something which falls near you in the sand, then sails
-off toward the west, singing a lively, but somewhat uncouth, sailor song." CR>
-		       <FSET ,VIKING-SHIP ,INVISIBLE>
-		       <MOVE ,VIAL ,HERE>)
-		      (<==? ,HERE ,FLATHEAD-OCEAN>
-		       <COND (,SHIP-GONE
-			      <TELL "Nothing happens anymore." CR>)
-			     (T <TELL "Nothing happens yet." CR>)>)
-		      (T <TELL "Nothing happens here." CR>)>)>>
 
 <GLOBAL SHIP-GONE <>>
 
@@ -2050,17 +2040,10 @@ off toward the west, singing a lively, but somewhat uncouth, sailor song." CR>
 	(FLAGS NDESCBIT INVISIBLE)
 	(ADJECTIVE VIKING)
 	(SYNONYM BOAT SHIP CRAFT)>
-		
-<OBJECT SAILOR
-	(IN GLOBAL-OBJECTS)
-	(SYNONYM SAILOR)
-	(DESC "sailor")
-	(FLAGS NDESCBIT)
-	(ACTION SAILOR-F)>
 
 <OBJECT VIAL
 	(DESC "vial")
-	(SYNONYM VIAL ODOR)
+	(SYNONYM VIAL ODOR GIFT)
 	(FLAGS TAKEBIT CONTBIT)
 	(SIZE 3)
 	(CAPACITY 3)
@@ -2111,7 +2094,7 @@ the vial, seeming to permeate the air briefly before fading entirely." CR>
 
 <ROUTINE VIAL-F ()
 	 <COND (<VERB? FILL> <TELL "You can't seem to put anything in it." CR>)
-	       (<AND <VERB? DRINK-FROM> <IN? ,POTION .VIAL>>
+	       (<AND <VERB? DRINK-FROM> <IN? ,POTION ,VIAL>>
 		<PERFORM ,V?DRINK ,POTION>
 		<RTRUE>)
 	       (<AND <VERB? SMELL> <IN? ,POTION ,VIAL>>
@@ -2144,7 +2127,7 @@ but invisible liquid.">)>
 	(DESC "Flathead Ocean")
 	(SYNONYM OCEAN WATER)
 	(ADJECTIVE FLATHEAD)
-	(FLAGS NDESCBIT VEHBIT)
+	(FLAGS NDESCBIT)
 	(ACTION OCEAN-F)>
 
 <ROUTINE OCEAN-F ()
@@ -2169,7 +2152,7 @@ but invisible liquid.">)>
 
 <GLOBAL SWORD-IN-STONE? T>
 
-<ROUTINE STONE-DESC ("OPTIONAL" FOO)
+<ROUTINE STONE-DESC (FOO)
 	 <TELL
 "Standing before you is a great rock.">
 	 <COND (,SWORD-IN-STONE?
@@ -2203,7 +2186,7 @@ but invisible liquid.">)>
 		<JIGS-UP
 "You enter the quicksand and slowly sink to a new low in adventuring.">)
 	       (<VERB? RUB>
-		<TELL "It's quicksand alright!" CR>)
+		<TELL "It's quicksand all right!" CR>)
 	       (<VERB? LOOK-INSIDE>
 		<TELL "It's hard to tell what's in there." CR>)>>
 
@@ -2233,4 +2216,4 @@ but invisible liquid.">)>
 "The arches all show some signs of decay." CR>)
 		      (T
 		       <TELL
-"The arch before you is broken.  The others show signs of decay." CR>)>)>>
+"The arch before you is broken. The others show signs of decay." CR>)>)>>

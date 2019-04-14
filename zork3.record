@@ -1,0 +1,960 @@
+
+Combined ZIL Compiler Ver 2.0 (MIM)
+-----------------------------------
+Input file: SS:<ZORK3>ZORK3.ZIL.25
+Input file: SS:<ZORK3>GSYNTAX.ZIL.8
+Input file: SS:<ZORK3>GMACROS.ZIL.3
+Compiling routine: ZPROB
+Compiling routine: RANDOM-ELEMENT
+Compiling routine: PICK-ONE
+Input file: SS:<ZORK3>GCLOCK.ZIL.3
+Compiling routine: QUEUE
+Compiling routine: INT
+Compiling routine: CLOCKER
+Input file: SS:<ZORK3>GMAIN.ZIL.8
+Compiling routine: MAIN-LOOP
+Compiling routine: MAIN-LOOP-1
+Compiling routine: PERFORM
+Input file: SS:<ZORK3>GPARSER.ZIL.10
+Compiling routine: PARSER
+Compiling routine: STUFF
+Compiling routine: INBUF-STUFF
+Compiling routine: INBUF-ADD
+Compiling routine: WT?
+Compiling routine: CLAUSE
+Compiling routine: NUMBER?
+Compiling routine: ORPHAN-MERGE
+Compiling routine: ACLAUSE-WIN
+Compiling routine: NCLAUSE-WIN
+Compiling routine: WORD-PRINT
+Compiling routine: UNKNOWN-WORD
+Compiling routine: CANT-USE
+Compiling routine: SYNTAX-CHECK
+Compiling routine: CANT-ORPHAN
+Compiling routine: ORPHAN
+Compiling routine: THING-PRINT
+Compiling routine: BUFFER-PRINT
+Compiling routine: PREP-PRINT
+Compiling routine: CLAUSE-COPY
+Compiling routine: CLAUSE-ADD
+Compiling routine: PREP-FIND
+Compiling routine: SYNTAX-FOUND
+Compiling routine: GWIM
+Compiling routine: SNARF-OBJECTS
+Compiling routine: BUT-MERGE
+Compiling routine: SNARFEM
+Compiling routine: GET-OBJECT
+Compiling routine: WHICH-PRINT
+Compiling routine: GLOBAL-CHECK
+Compiling routine: DO-SL
+Compiling routine: SEARCH-LIST
+Compiling routine: OBJ-FOUND
+Compiling routine: TAKE-CHECK
+Compiling routine: ITAKE-CHECK
+Compiling routine: MANY-CHECK
+Compiling routine: ZMEMQ
+Compiling routine: ZMEMQB
+Compiling routine: LIT?
+Compiling routine: THIS-IT?
+Compiling routine: ACCESSIBLE?
+Compiling routine: META-LOC
+Input file: SS:<ZORK3>3DUNGEON.ZIL.4
+Compiling routine: GO
+Input file: SS:<ZORK3>GGLOBALS.ZIL.11
+Compiling routine: NOT-HERE-OBJECT-F
+Compiling routine: NOT-HERE-PRINT
+Compiling routine: NULL-F
+Compiling routine: STAIRS-F
+Compiling routine: SAILOR-FCN
+Compiling routine: GROUND-FUNCTION
+Compiling routine: GRUE-FUNCTION
+Compiling routine: CRETIN-FCN
+Compiling routine: PATH-OBJECT
+Compiling routine: ZORKMID-FUNCTION
+Input file: SS:<ZORK3>GVERBS.ZIL.16
+Compiling routine: V-VERBOSE
+Compiling routine: V-BRIEF
+Compiling routine: V-SUPER-BRIEF
+Compiling routine: V-INVENTORY
+Compiling routine: FINISH
+Compiling routine: V-QUIT
+Compiling routine: V-RESTART
+Compiling routine: V-RESTORE
+Compiling routine: V-SAVE
+Compiling routine: V-SCRIPT
+Compiling routine: V-UNSCRIPT
+Compiling routine: V-VERSION
+Compiling routine: V-VERIFY
+Compiling routine: V-COMMAND-FILE
+Compiling routine: V-RANDOM
+Compiling routine: V-RECORD
+Compiling routine: V-UNRECORD
+Compiling routine: V-ADVENT
+Compiling routine: V-ALARM
+Compiling routine: V-ANSWER
+Compiling routine: V-ATTACK
+Compiling routine: V-BACK
+Compiling routine: V-BLAST
+Compiling routine: PRE-BOARD
+Compiling routine: V-BOARD
+Compiling routine: V-BREATHE
+Compiling routine: V-BRUSH
+Compiling routine: V-BUG
+Compiling routine: TELL-NO-PRSI
+Compiling routine: PRE-BURN
+Compiling routine: V-BURN
+Compiling routine: V-CHOMP
+Compiling routine: V-CLIMB-DOWN
+Compiling routine: V-CLIMB-FOO
+Compiling routine: V-CLIMB-ON
+Compiling routine: V-CLIMB-UP
+Compiling routine: V-CLOSE
+Compiling routine: V-COMMAND
+Compiling routine: V-COUNT
+Compiling routine: V-CROSS
+Compiling routine: V-CURSES
+Compiling routine: V-CUT
+Compiling routine: V-DEFLATE
+Compiling routine: V-DIG
+Compiling routine: V-DISEMBARK
+Compiling routine: V-DISENCHANT
+Compiling routine: V-DRINK
+Compiling routine: V-DRINK-FROM
+Compiling routine: PRE-DROP
+Compiling routine: V-DROP
+Compiling routine: V-EAT
+Compiling routine: HIT-SPOT
+Compiling routine: V-ECHO
+Compiling routine: V-ENCHANT
+Compiling routine: REMOVE-CAREFULLY
+Compiling routine: V-ENTER
+Compiling routine: V-EXAMINE
+Compiling routine: V-EXIT
+Compiling routine: V-EXORCISE
+Compiling routine: PRE-FILL
+Compiling routine: V-FILL
+Compiling routine: V-FIND
+Compiling routine: V-FOLLOW
+Compiling routine: V-FROBOZZ
+Compiling routine: PRE-GIVE
+Compiling routine: V-GIVE
+Compiling routine: V-HATCH
+Compiling routine: V-HELLO
+Compiling routine: V-INCANT
+Compiling routine: V-INFLATE
+Compiling routine: V-KICK
+Compiling routine: V-KISS
+Compiling routine: V-KNOCK
+Compiling routine: V-LAMP-OFF
+Compiling routine: V-LAMP-ON
+Compiling routine: V-LAUNCH
+Compiling routine: V-LEAN-ON
+Compiling routine: V-LEAP
+Compiling routine: V-LEAVE
+Compiling routine: V-LISTEN
+Compiling routine: V-LOCK
+Compiling routine: V-LOOK
+Compiling routine: V-LOOK-BEHIND
+Compiling routine: V-LOOK-INSIDE
+Compiling routine: V-LOOK-ON
+Compiling routine: V-LOOK-UNDER
+Compiling routine: V-LOWER
+Compiling routine: V-MAKE
+Compiling routine: V-MELT
+Compiling routine: PRE-MOVE
+Compiling routine: V-MOVE
+Compiling routine: V-MUMBLE
+Compiling routine: PRE-MUNG
+Compiling routine: V-MUNG
+Compiling routine: V-ODYSSEUS
+Compiling routine: V-OIL
+Compiling routine: V-OPEN
+Compiling routine: V-OVERBOARD
+Compiling routine: V-PICK
+Compiling routine: V-PLAY
+Compiling routine: V-PLUG
+Compiling routine: V-POUR-ON
+Compiling routine: V-PRAY
+Compiling routine: V-PUMP
+Compiling routine: V-PUSH
+Compiling routine: V-PUSH-TO
+Compiling routine: PRE-PUT
+Compiling routine: V-PUT
+Compiling routine: V-PUT-BEHIND
+Compiling routine: V-PUT-ON
+Compiling routine: V-PUT-UNDER
+Compiling routine: V-RAISE
+Compiling routine: V-RAPE
+Compiling routine: PRE-READ
+Compiling routine: V-READ
+Compiling routine: V-READ-PAGE
+Compiling routine: V-REPENT
+Compiling routine: V-REPLY
+Compiling routine: V-RING
+Compiling routine: V-RUB
+Compiling routine: V-SAY
+Compiling routine: V-SEARCH
+Compiling routine: V-SEND
+Compiling routine: PRE-SGIVE
+Compiling routine: V-SGIVE
+Compiling routine: V-SHAKE
+Compiling routine: SHAKE-LOOP
+Compiling routine: V-SKIP
+Compiling routine: V-SMELL
+Compiling routine: V-SPIN
+Compiling routine: V-SPRAY
+Compiling routine: V-SQUEEZE
+Compiling routine: V-SSPRAY
+Compiling routine: V-STAB
+Compiling routine: V-STAND
+Compiling routine: V-STAY
+Compiling routine: V-STRIKE
+Compiling routine: V-SWIM
+Compiling routine: V-SWING
+Compiling routine: PRE-TAKE
+Compiling routine: V-TAKE
+Compiling routine: V-TELL
+Compiling routine: V-THROUGH
+Compiling routine: V-THROW
+Compiling routine: V-THROW-OFF
+Compiling routine: V-TIE
+Compiling routine: V-TIE-UP
+Compiling routine: V-TREASURE
+Compiling routine: PRE-TURN
+Compiling routine: V-TURN
+Compiling routine: V-UNLOCK
+Compiling routine: V-UNTIE
+Compiling routine: V-WAIT
+Compiling routine: V-WALK
+Compiling routine: V-WALK-AROUND
+Compiling routine: V-WALK-TO
+Compiling routine: V-WAVE
+Compiling routine: V-WEAR
+Compiling routine: V-WIN
+Compiling routine: V-WIND
+Compiling routine: V-WISH
+Compiling routine: V-YELL
+Compiling routine: V-ZORK
+Compiling routine: V-FIRST-LOOK
+Compiling routine: DESCRIBE-ROOM
+Compiling routine: DESCRIBE-OBJECTS
+Compiling routine: DESCRIBE-OBJECT
+Compiling routine: PRINT-CONTENTS
+Compiling routine: PRINT-CONT
+Compiling routine: FIRSTER
+Compiling routine: SEE-INSIDE?
+Compiling routine: SCORE-UPD
+Compiling routine: SCORE-OBJ
+Compiling routine: YES?
+Compiling routine: ITAKE
+Compiling routine: IDROP
+Compiling routine: CCOUNT
+Compiling routine: WEIGHT
+Compiling routine: HACK-HACK
+Compiling routine: NO-GO-TELL
+Compiling routine: GOTO
+Compiling routine: LKP
+Compiling routine: DO-WALK
+Compiling routine: GLOBAL-IN?
+Compiling routine: FIND-IN
+Compiling routine: HELD?
+Compiling routine: OTHER-SIDE
+Compiling routine: MUNG-ROOM
+Compiling routine: THIS-IS-IT
+Input file: SS:<ZORK3>3ACTIONS.ZIL.30
+Compiling routine: I-SWORD
+Compiling routine: INFESTED?
+Compiling routine: FIND-WEAPON
+Compiling routine: SWORD-FCN
+Compiling routine: LANTERN
+Compiling routine: LIGHT-INT
+Compiling routine: I-LANTERN
+Compiling routine: CHASM-FCN
+Compiling routine: TUNNEL-OBJECT
+Compiling routine: CPEXIT
+Compiling routine: ILLCP
+Compiling routine: CPMOVE
+Compiling routine: CPENTER
+Compiling routine: CPANT-ROOM
+Compiling routine: CPLADDER-OBJECT
+Compiling routine: CPLADDER-JUNK
+Compiling routine: CPWALL-OBJECT
+Compiling routine: FIXED-FONT-ON
+Compiling routine: FIXED-FONT-OFF
+Compiling routine: CPGOTO
+Compiling routine: CPNEXT
+Compiling routine: CPDOOR-F
+Compiling routine: CP-ROOM
+Compiling routine: CPNS
+Compiling routine: CPEW
+Compiling routine: CPWHERE
+Compiling routine: CP-ORTHO
+Compiling routine: CP-CORNER
+Compiling routine: CP-SLOT-FCN
+Compiling routine: CPOUT-ROOM
+Compiling routine: MRGO
+Compiling routine: MIRBLOCK
+Compiling routine: GO-E-W
+Compiling routine: EWTELL
+Compiling routine: MRDEW
+Compiling routine: MRCEW
+Compiling routine: MRBEW
+Compiling routine: MRAEW
+Compiling routine: LOOK-TO
+Compiling routine: MRDF
+Compiling routine: MRCF
+Compiling routine: MRBF
+Compiling routine: MRAF
+Compiling routine: GUARDIANS
+Compiling routine: MIRROR-DIR?
+Compiling routine: WOODEN-WALL-F
+Compiling routine: MIRROR-HERE?
+Compiling routine: MIRROR-FUNCTION
+Compiling routine: PANEL-FUNCTION
+Compiling routine: MIROUT
+Compiling routine: MIRNS
+Compiling routine: MIREW
+Compiling routine: MIRIN
+Compiling routine: MREYE-ROOM
+Compiling routine: BEAM-STOPPED?
+Compiling routine: BEAM-FUNCTION
+Compiling routine: MRSWITCH
+Compiling routine: I-MRINT
+Compiling routine: MAGIC-MIRROR
+Compiling routine: MPANELS
+Compiling routine: MENDS
+Compiling routine: I-PININ
+Compiling routine: MIRMOVE
+Compiling routine: SHORT-POLE-F
+Compiling routine: DUNGEON-MASTER-F
+Compiling routine: MASTER-F
+Compiling routine: BEHIND-DOOR-F
+Compiling routine: FRONT-DOOR-F
+Compiling routine: LOOK-LIKE-DM?
+Compiling routine: DUNGEON-PANEL-F
+Compiling routine: DUNGEON-DOOR-F
+Compiling routine: DMISH
+Compiling routine: I-FOLIN
+Compiling routine: MOVE-CELL-OBJECTS
+Compiling routine: CELL-MOVE
+Compiling routine: PARAPET-F
+Compiling routine: DIAL
+Compiling routine: DIALBUTTON
+Compiling routine: CELL-ROOM
+Compiling routine: NCELL-ROOM
+Compiling routine: DPR
+Compiling routine: NORTH-CORRIDOR-F
+Compiling routine: SOUTH-CORRIDOR-F
+Compiling routine: BRONZE-DOOR-F
+Compiling routine: LOCKED-DOOR-F
+Compiling routine: NIRVANA-F
+Compiling routine: BRONZE-DOOR-EXIT
+Compiling routine: SECRET-DOOR-F
+Compiling routine: MSTAIRS-F
+Compiling routine: HELLO?
+Compiling routine: OLD-MAN-F
+Compiling routine: I-OLD-MAN-SLEEPS
+Compiling routine: RUNES-F
+Compiling routine: T-BAR-F
+Compiling routine: FLAMING-PIT-F
+Compiling routine: PARAPET-OBJ-F
+Compiling routine: ROSE-F
+Compiling routine: CELL-DOOR-F
+Compiling routine: LORE-BOOK-F
+Compiling routine: CP-HOLE-F
+Compiling routine: TORCH-PSEUDO
+Compiling routine: WATER-FCN
+Compiling routine: RANDOM-WALL
+Compiling routine: V-DIAGNOSE
+Compiling routine: JIGS-UP
+Compiling routine: RANDOMIZE-OBJECTS
+Compiling routine: KILL-INTERRUPTS
+Compiling routine: V-SCORE
+Compiling routine: TM-HOLLOW-F
+Compiling routine: IRON-DOOR-F
+Compiling routine: I-CLEFT
+Compiling routine: CLEFT-F
+Compiling routine: MUSEUM-ANTE-F
+Compiling routine: DDESC
+Compiling routine: MUSEUM-ENTRANCE-F
+Compiling routine: TIME-MACHINE-F
+Compiling routine: TM-SEAT-F
+Compiling routine: TM-DIAL-F
+Compiling routine: TM-BUTTON-F
+Compiling routine: HAPPY-NEW-YEAR
+Compiling routine: I-SNAP
+Compiling routine: MOVE-JEWELS
+Compiling routine: TGOTO
+Compiling routine: MOVE-TM-OBJECTS
+Compiling routine: GUARDS-KILL
+Compiling routine: FLATHEAD-SENTENCE
+Compiling routine: REALLY-DEAD
+Compiling routine: HEAR-FLATHEAD
+Compiling routine: OLD-TECH-MUSEUM-F
+Compiling routine: I-GUARDS-LEAVE
+Compiling routine: GUARD-CAUGHT
+Compiling routine: ROBOT-F
+Compiling routine: JEWEL-ROOM-F
+Compiling routine: CROWN-JEWELS-F
+Compiling routine: TECH-MUSEUM-F
+Compiling routine: PLAQUE-F
+Compiling routine: WOODEN-DOOR-F
+Compiling routine: JEWEL-DOOR-F
+Compiling routine: CAGE-F
+Compiling routine: VOICES-F
+Compiling routine: MUSEUM-PIECES
+Compiling routine: TECH-PLAQUE-F
+Compiling routine: PEDESTAL-F
+Compiling routine: PICK-DIRECTION
+Compiling routine: SHADOW-F
+Compiling routine: I-CURE
+Compiling routine: SHADOW-ATTACK
+Compiling routine: I-SHADOW-REPLY
+Compiling routine: SHADOW-DIES
+Compiling routine: HOOD-F
+Compiling routine: CLOAK-F
+Compiling routine: SHADOW-ROOMS
+Compiling routine: SHADOW-ARRIVAL
+Compiling routine: CREEPY-CRAWL-F
+Compiling routine: LEDGE-F
+Compiling routine: WAYBREAD-F
+Compiling routine: STAFF-F
+Compiling routine: I-MAN-APPEARS
+Compiling routine: I-MAN-PRESENT
+Compiling routine: CLIFF-BASE-F
+Compiling routine: CLIFF-LEDGE-F
+Compiling routine: CLIFF-F
+Compiling routine: GLOBAL-ROPE-F
+Compiling routine: I-MAN-RETURNS
+Compiling routine: I-MAN-LIFT
+Compiling routine: CHEST-F
+Compiling routine: I-MAN-LEAVES
+Compiling routine: MAN-F
+Compiling routine: VALUABLES-F
+Compiling routine: ROPE-F
+Compiling routine: GLOBAL-MAN-F
+Compiling routine: LAKE-F
+Compiling routine: IN-LAKE-F
+Compiling routine: I-IN-LAKE
+Compiling routine: ON-LAKE-F
+Compiling routine: GO-ON-LAKE
+Compiling routine: I-ON-LAKE
+Compiling routine: I-ROC
+Compiling routine: SHINY-OBJECT-F
+Compiling routine: SAND-F
+Compiling routine: ALGAE-F
+Compiling routine: FRIED-LAMP-F
+Compiling routine: I-VIEW-SNAP
+Compiling routine: VIEWING-TABLE-F
+Compiling routine: I-VIEW-CHANGE
+Compiling routine: VIEW-ROOM-F
+Compiling routine: CLIFF-OBJECT-F
+Compiling routine: TREE-F
+Compiling routine: FRIED-TORCH-F
+Compiling routine: TORCH-F
+Compiling routine: NO-OBJS
+Compiling routine: REPELLENT-FCN
+Compiling routine: I-SPRAY
+Compiling routine: ZORK-IV-F
+Compiling routine: AQUEDUCT-F
+Compiling routine: WATER-CHANNEL-F
+Compiling routine: MOSS-F
+Compiling routine: AQ-2-F
+Compiling routine: AQ-3-F
+Compiling routine: COVER-F
+Compiling routine: KEY-ROOM-F
+Compiling routine: KEY-F
+Compiling routine: VIEW-INDICATOR-F
+Compiling routine: FLATHEAD-OCEAN-F
+Compiling routine: I-BOAT-DISAPPEAR
+Compiling routine: I-VISIBLE
+Compiling routine: POTION-F
+Compiling routine: VIAL-F
+Compiling routine: OCEAN-F
+Compiling routine: STONE-DESC
+Compiling routine: STONE-F
+Compiling routine: FISH-F
+Compiling routine: QUICKSAND-PSEUDO
+Compiling routine: SWAMP-PSEUDO
+Compiling routine: MIST-PSEUDO
+Compiling routine: SHORE-PSEUDO
+Compiling routine: WATERFALL-PSEUDO
+Compiling routine: ARCH-PSEUDO
+ ** Note: OBJECT has no properties: GLOBAL-OBJECTS
+ ** Note: OBJECT has no properties: MACHINE-ROOM
+Vocabulary: 600
+Prepositions: 18
+	 OFF
+	 ON
+	 IN
+	 TO
+	 WITH
+	 UNDER
+	 DOWN
+	 UP
+	 BEHIND
+	 AROUND
+	 FOR
+	 AT
+	 ACROSS
+	 OVER
+	 AWAY
+	 FROM
+	 OUT
+Objects: 228
+	 ROPE
+	 TREE
+	 STAFF
+	 BROKEN-STAFF
+	 CHEST
+	 VALUABLES
+	 MAN
+	 TIMBERS
+	 TIMBER-ROOM
+	 LADDER-TOP
+	 LADDER
+	 LADDER-BOTTOM
+	 DEAD-END-5
+	 LOWER-SHAFT
+	 MACHINE-ROOM
+	 ROOM-8
+	 REPELLENT
+	 ZORK-IV
+	 SOUTH-SHORE
+	 DARK-1
+	 DARK-2
+	 KEY-ROOM
+	 AQ-1
+	 AQ-2
+	 AQ-3
+	 COVER
+	 KEY
+	 VIEW-INDICATOR
+	 VIKING-SHIP
+	 VIAL
+	 POTION
+	 OCEAN
+	 MUSEUM-ENTRANCE
+	 PSEUDO-OBJECT
+	 PRISON-CELL
+	 MRD
+	 SECRET-DOOR
+	 MRBE
+	 TECH-PLAQUE
+	 CP-HOLE
+	 YELLOW-PANEL
+	 BRONZE-DOOR
+	 DUNGEON-DOOR
+	 PARAPET-OBJ
+	 JEWEL-DOOR
+	 GOOD-CELL
+	 SWORD
+	 TUNNEL
+	 IRON-DOOR
+	 MOSS
+	 RED-PANEL
+	 LONG-POLE
+	 CP
+	 RED-BUTTON
+	 SOUTH-CORRIDOR
+	 CP-OUT
+	 CPNWL
+	 CELL-DOOR
+	 SCEPTRE
+	 OLD-JEWEL-ROOM
+	 MRAW
+	 TECH-MUSEUM
+	 T-BAR
+	 JEWELLED-KNIFE
+	 MID-MUSEUM-ENTRANCE
+	 MSTAIRS
+	 WARNING-NOTE
+	 MRA
+	 INTNUM
+	 NOT-HERE-OBJECT
+	 GROUND
+	 WATER
+	 WEST-CORRIDOR
+	 MRCE
+	 IN-MIRROR
+	 BEHIND-DOOR
+	 WOODEN-BAR
+	 STAIRS
+	 GOOD-LOCKED-DOOR
+	 GUARDIAN
+	 MRGE
+	 GRUE
+	 CP-SLOT
+	 DUNGEON-PANEL
+	 STONE
+	 BROKEN-LAMP
+	 CP-ANTE
+	 WEST-WALL
+	 LUNGS
+	 MUSEUM-ANTE
+	 EAST-WALL
+	 SPINNER
+	 PLAQUE
+	 MID-CP-OUT
+	 BLESSINGS
+	 COMPASS-ARROW
+	 LAMP
+	 NORTH-WALL
+	 TIME-MACHINE
+	 TM-SEAT
+	 TM-BUTTON
+	 MRBW
+	 DEBRIS
+	 CPDOOR
+	 WIDE-HALL
+	 CPSWL
+	 MRB
+	 RING
+	 SAILOR
+	 CHANNEL
+	 MIRROR
+	 FRONT-DOOR
+	 CPWWL
+	 JEWEL-ROOM
+	 ZORKMID
+	 MRDE
+	 MR-ANTE
+	 OLD-MAN
+	 ROSE
+	 DAMP-PASSAGE
+	 PRESSURIZER
+	 CHASM
+	 CLEFT
+	 SUNDIAL
+	 BLACK-PANEL
+	 DEAD-END
+	 CPLADDER
+	 MID-CP-ANTE
+	 WOODEN-DOOR
+	 ROCKY-ROOM
+	 WOODEN-WALL
+	 ROBOT
+	 LORE-BOOK
+	 TM-DIAL
+	 SOUTH-WALL
+	 LOCKED-DOOR
+	 WATER-CHANNEL
+	 OLD-TECH-MUSEUM
+	 PINE-PANEL
+	 PEDESTAL
+	 DIAL-BUTTON
+	 MRCW
+	 PATHOBJ
+	 MRC
+	 IT
+	 WHITE-PANEL
+	 MRAE
+	 CRYSTALS
+	 GLOBAL-OBJECTS
+	 MRGW
+	 NIRVANA
+	 CELL
+	 MRG
+	 EAST-CORRIDOR
+	 CPEWL
+	 LOCAL-GLOBALS
+	 TIGHT-SQUEEZE
+	 ROYAL-SEAL
+	 MAHOGANY-PANEL
+	 PARAPET
+	 ADVENTURER
+	 ROOMS
+	 INTDIR
+	 RUNES
+	 PANEL
+	 OLD-MUSEUM-ENTRANCE
+	 BEAM
+	 TM-HOLLOW
+	 ME
+	 VOICES
+	 NORTH-CORRIDOR
+	 MID-JEWEL-ROOM
+	 RUBBLE
+	 MASTER
+	 CAGE
+	 HANDS
+	 MRDW
+	 GLOBAL-WATER
+	 MREYE
+	 MID-TECH-MUSEUM
+	 FLAMING-PIT
+	 SHORT-POLE
+	 DUNGEON-MASTER
+	 CREEPY-CRAWL
+	 SHADOW-1
+	 SHADOW-2
+	 STONE-WALL
+	 SHADOW-3
+	 SHADOW-4
+	 SHADOW-5
+	 SHADOW-6
+	 SHADOW-7
+	 SHADOW-8
+	 FLATHEAD-OCEAN
+	 SHADOW
+	 HOOD
+	 CLOAK
+	 ZORK2-STAIR
+	 JUNCTION
+	 CLEARING
+	 SLOPE
+	 CLIFF-BASE
+	 LEDGE
+	 CLIFF
+	 GLOBAL-MAN
+	 CLIFF-OBJECT
+	 CLIFF-LEDGE
+	 GLOBAL-ROPE
+	 FOGGY-ROOM
+	 LAKE-SHORE
+	 LAKE
+	 AQ-VIEW
+	 AQUEDUCT
+	 ON-LAKE
+	 FISH
+	 IN-LAKE
+	 FAR-SHORE
+	 REEDS
+	 VIEW-ROOM
+	 VIEWING-TABLE
+	 TORCH
+	 FRIED-TORCH
+	 AMULET
+	 SAND
+	 FRIED-LAMP
+	 ALGAE
+	 SHINY-OBJECT
+	 WAYBREAD
+Properties: 31
+	 P?SW
+	 P?SE
+	 P?NW
+	 P?NE
+	 P?WEST
+	 P?EAST
+	 P?SOUTH
+	 P?NORTH
+	 P?VTYPE
+	 P?CONTFCN
+	 P?ADVFCN
+	 P?DESCFCN
+	 P?PSEUDO
+	 P?ENTER
+	 P?CAPACITY
+	 P?TEXT
+	 P?GLOBAL
+	 P?VALUE
+	 P?FDESC
+	 P?SIZE
+	 P?LDESC
+	 P?ACTION
+	 P?ADJECTIVE
+	 P?SYNONYM
+	 P?CROSS
+	 P?LAND
+	 P?OUT
+	 P?IN
+	 P?DOWN
+	 P?UP
+Globals: 196
+	 CHEST-LIFTED
+	 MAN-SEEN
+	 MAN-WAITS
+	 MAN-WAITING
+	 MAN-FLAG
+	 MAN-POINT
+	 MAN-GONE
+	 CHEST-TIED
+	 HOLDING-ROPE
+	 LIFT-WAIT
+	 CHEST-OPENED
+	 ROPE-FLAG
+	 LAST-MOVES
+	 LAKE-POINT
+	 CURRENT-LAMP
+	 LAKE-TIME
+	 VIEW-POINT
+	 VIEW-ROMANS
+	 ACTIVE-VIEW
+	 VIEW-ROOMS
+	 VIEWS
+	 EMPTY-HANDED
+	 SPRAY-USED?
+	 AQ-FLAG
+	 COVER-MOVED
+	 KEY-DESCS
+	 BOAT-SEEN
+	 SHIP-GONE
+	 INVIS
+	 SWORD-IN-STONE?
+	 P-NCN
+	 MINUS-FIVE
+	 P-NOT-HERE
+	 MINUS-FOUR
+	 GUARDIANS-SEEN
+	 HELLOS
+	 MIRROR-FIRST
+	 R-EASTS
+	 R-NORTHS
+	 GUARD-KILLERS
+	 SURROUNDINGS-CHANGED
+	 DEAD-OBJ-LOCS
+	 DIAG
+	 SECRET-DOOR-DESC
+	 CELLOBJS
+	 P-OVTBL
+	 P-VTBL
+	 P-LEXV
+	 P-CCTBL
+	 C-TABLE
+	 AGAIN-LEXV
+	 RESERVE-LEXV
+	 DM-REASONS
+	 LONGDIRS
+	 DIRVEC
+	 P-INBUF
+	 OOPS-INBUF
+	 P-OCLAUSE
+	 P-MERGE
+	 P-BUTS
+	 P-PRSI
+	 P-PRSO
+	 JUMPLOSS
+	 HO-HUM
+	 CPEXITS
+	 CPWALLS
+	 CPTABLE
+	 CPOBJS
+	 LAMP-TABLE
+	 DUMMY
+	 YUKS
+	 R-SOUTHS
+	 INDENTS
+	 WHEEEEE
+	 OOPS-TABLE
+	 P-ITBL
+	 P-OTBL
+	 HEAR-VOICES
+	 BLATHER
+	 R-WESTS
+	 GUARDSTR
+	 MDIR
+	 RESERVE-PTR
+	 PRSI
+	 MR2-FLAG
+	 SWORD-STATE
+	 P-IT-OBJECT
+	 HS
+	 OLD-MAN-FED
+	 FLATHEAD-HEARD
+	 AGAIN-DIR
+	 SNAP-LOC
+	 P-ADJN
+	 WINNER
+	 BRONZE-DOOR-LOCKED
+	 P-OFLAG
+	 P-NUMBER
+	 FUMBLE-PROB
+	 MACHINE-DAMAGED
+	 P-GETFLAGS
+	 LOAD-MAX
+	 YEAR-CLOSED
+	 P-TABLE
+	 MRSWPUSH-FLAG
+	 QUOTE-FLAG
+	 WON-FLAG
+	 MLOC
+	 P-WON
+	 DEATHS
+	 WOOD-OPEN-FLAG
+	 TM-POINT
+	 DEAD
+	 MR1-FLAG
+	 MIRROR-OPENED
+	 MINUS-ONE
+	 CP-FLAG
+	 P-ONEOBJ
+	 P-AND
+	 MYSTERY
+	 OLD-MAN-GONE
+	 CLEFT-QUEUED?
+	 IN-DUNGEON
+	 OLD-MAN-AWAKE
+	 PRSA
+	 P-AADJ
+	 P-XADJ
+	 P-SYNTAX
+	 MIRROR-OPEN-FLAG
+	 CPHERE
+	 C-DEMONS
+	 P-GWIMBIT
+	 P-MERGED
+	 PNUMB
+	 DM-SEEN
+	 PRSO
+	 SPRAYED?
+	 LCELL
+	 CPBLOCK-FLAG
+	 SCORE-MAX
+	 LOAD-ALLOWED
+	 C-INTS
+	 P-LEN
+	 CPSOLVE-FLAG
+	 P-ADJ
+	 P-ACT
+	 P-XADJN
+	 LIT
+	 RING-CONCEALED
+	 RING-STOLEN
+	 DESC-OBJECT
+	 FUMBLE-NUMBER
+	 P-DIRECTION
+	 CLUMSY-ROBBERY
+	 FOLFLAG
+	 P-CONT
+	 YEAR
+	 CP-MOVED
+	 PLAYER
+	 P-ANAM
+	 POLEUP-FLAG
+	 P-WALK-DIR
+	 TM-YEAR
+	 P-XNAM
+	 LUCKY
+	 ALWAYS-LIT
+	 P-NAM
+	 P-MULT
+	 CLOCK-WAIT
+	 CPPUSH-FLAG
+	 BASE-SCORE
+	 P-ADVERB
+	 P-MATCHLEN
+	 BEAM-BREAKER
+	 P-SLOCBITS
+	 P-ACLAUSE
+	 P-DIR
+	 VERBOSE
+	 GUARDS-PRESENT
+	 MINUS-SEVEN
+	 CLEFT-FLAG
+	 SUPER-BRIEF
+	 P-END-ON-PREP
+	 DIRS
+	 DIR-TBL
+	 SHADOW-DIAG
+	 P-STRENGTH
+	 S-STRENGTH
+	 ATTACK-MODE
+	 SHADOW-GONE
+	 P-HITS
+	 P-MISSES
+	 S-HITS
+	 S-MISSES
+	 BLOCKED-DIR
+	 SHADOW-POINT-1
+	 SHADOW-POINT-2

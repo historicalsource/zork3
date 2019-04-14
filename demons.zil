@@ -1,4 +1,8 @@
-
+"DEMONS for
+		     Zork III: The Dungeon Master 
+		 The Great Underground Empire (Part 3)
+	(c) Copyright 1982 Infocom, Inc.  All Rights Reserved.
+"
 
 "SWORD demon"
 
@@ -36,6 +40,6 @@
 <ROUTINE INFESTED? (R "AUX" (F <FIRST? .R>)) 
 	 <REPEAT ()
 		 <COND (<NOT .F> <RETURN <>>)
-		       (<AND <FSET? .F ,VILLAIN> <NOT <FSET? .F ,INVISIBLE>>>
+		       (<AND <FSET? .F ,ACTORBIT> <NOT <FSET? .F ,INVISIBLE>>>
 			<RETURN .F>)
 		       (<NOT <SET F <NEXT? .F>>> <RETURN <>>)>>>

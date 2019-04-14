@@ -23,46 +23,7 @@
  
 <CONSTANT M-FLASH 4>
 
-<CONSTANT M-OBJDESC 5>
-
-<ROUTINE GO () 
-;"put interrupts on clock chain"
-	 <QUEUE I-LANTERN 200>
-;"clean up junk compiler can't do"
-	 <SETG CURRENT-LAMP ,LAMP>
-	 <PUT ,CPOBJS <* 8 21> 1>
-	 <PUT ,CPOBJS <+ <* 8 21> 1> ,LORE-BOOK>
-	 <PUT ,CPOBJS <* 8 32> 1>
-	 <PUT ,CPOBJS <+ <* 8 32> 1> ,CP-SLOT>
- ;"set up and go"
-	 <SETG LIT T>
-	 <SETG WINNER ,ADVENTURER>
-	 <SETG PLAYER ,WINNER>
-	 <SETG MLOC ,MRB>
-	 <SETG HERE ,ZORK2-STAIR>
-	 <ENABLE <QUEUE I-CLEFT <+ 70 <RANDOM 70>>>>
-	 <ENABLE <QUEUE I-VIEW-CHANGE 4>>
-	 <SETG P-IT-LOC ,HERE>
-	 <SETG P-IT-OBJECT <>>
-	 <COND (<NOT <FSET? ,HERE ,TOUCHBIT>>
-		<TELL
-"As in a dream, you see yourself tumbling down a great, dark staircase.
-All about you are shadowy images of struggles against fierce opponents
-and diabolical traps. These give way to another round of images: of
-imposing stone figures, a cool, clear lake, and, now, of an old, yet
-oddly youthful man. He turns toward you slowly, his long, silver hair
-dancing about him in a fresh breeze. \"You have reached the final test,
-my friend! You are proved clever and powerful, but this is not yet
-enough! Seek me when you feel yourself worthy!\" The dream dissolves
-around you as his last words echo through the void...." CR>
-		<CRLF>
-		<V-VERSION>
-		<CRLF>)>
-	 <MOVE ,WINNER ,HERE>
-	 <MOVE ,LAMP ,HERE>
-	 <V-LOOK>
-	 <MAIN-LOOP>
-	 <AGAIN>>    
+<CONSTANT M-OBJDESC 5>    
 
 
 <ROUTINE MAIN-LOOP ("AUX" ICNT OCNT NUM CNT OBJ TBL V PTBL OBJ1 TMP) 
@@ -122,15 +83,14 @@ around you as his last words echo through the void...." CR>
 		   <SETG L-PRSA ,PRSA>
 		   <SETG L-PRSO ,PRSO>
 		   <SETG L-PRSI ,PRSI>)>
+	    <SETG MOVES <+ ,MOVES 1>>
 	    <COND (<==? .V ,M-FATAL> <SETG P-CONT <>>)>)
 	   (T
 	    <SETG P-CONT <>>)>
      <COND (,P-WON
 	    <COND (<VERB? TELL BRIEF SUPER-BRIEF VERBOSE SAVE VERSION
 			  QUIT RESTART SCORE SCRIPT UNSCRIPT RESTORE> T)
-		  (T
-		   <SETG MOVES <+ ,MOVES 1>>
-		   <SET V <CLOCKER>>)>)>>>
+		  (T <SET V <CLOCKER>>)>)>>>
  
 <GLOBAL L-PRSA <>>  
  

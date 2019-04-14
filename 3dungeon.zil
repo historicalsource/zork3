@@ -75,6 +75,14 @@
 	(FLAGS DRINKBIT)
 	(ACTION WATER-FCN)>
 
+<OBJECT WATER
+	(SYNONYM WATER QUANTITY LIQUID H2O)
+	(DESC "quantity of water")
+	(FLAGS TAKEBIT DRINKBIT)
+	(ACTION WATER-FCN)
+	(LDESC "There is some water here.")
+	(SIZE 4)>
+
 <OBJECT BROKEN-LAMP	;"was BLAMP"
 	(SYNONYM LAMP LANTERN)
 	(ADJECTIVE BROKEN BRASS)
@@ -156,7 +164,7 @@
     The Royal Puzzle is dangerous and it is possible to become
 trapped within its confines. Please do not enter the puzzle after hours
 when museum personnel are not present.|
-              The Management|")>
+              The Management")>
 
 <OBJECT CP-SLOT
 	(SYNONYM CPSLT SLIT SLOT)
@@ -256,7 +264,7 @@ The book itself is very old and the pages dry and brittle.")
 <OBJECT MASTER
 	(IN LOCAL-GLOBALS)
 	(DESC "dungeon master")
-	(SYNONYM MASTER)
+	(SYNONYM MASTER MAN)
 	(ADJECTIVE DUNGEON)
 	(FLAGS ACTORBIT)
 	(ACTION MASTER-F)>
@@ -266,7 +274,7 @@ The book itself is very old and the pages dry and brittle.")
 	(DESC "dungeon master")
 	(LDESC
 "The dungeon master is quietly leaning on his staff here.")
-	(SYNONYM MASTER DUNGEON)
+	(SYNONYM MASTER DUNGEON MAN)
 	(ADJECTIVE DUNGEON)
 	(FLAGS ACTORBIT)
 	(ACTION DUNGEON-MASTER-F)>
@@ -911,8 +919,7 @@ the Frobozz Magic Boat Co., etc.|
 	(ACTION CP-HOLE-F)>
 
 <ROUTINE GO () 
-	 <PUTB ,P-LEXV 0 59>
-;"put interrupts on clock chain"
+	 ;"put interrupts on clock chain"
 	 <QUEUE I-LANTERN 200>
 ;"clean up junk compiler can't do"
 	 <SETG CURRENT-LAMP ,LAMP>
@@ -927,7 +934,7 @@ the Frobozz Magic Boat Co., etc.|
 	 <SETG MLOC ,MRB>
 	 <SETG HERE ,ZORK2-STAIR>
 	 <MOVE ,WINNER ,HERE>
-	 <ENABLE <QUEUE I-CLEFT <+ 70 <RANDOM 70>>>>
+	 ;<ENABLE <QUEUE I-CLEFT <+ 70 <RANDOM 70>>>>
 	 <ENABLE <QUEUE I-VIEW-CHANGE 4>>
 	 <SETG P-IT-OBJECT <>>
 	 <COND (<NOT <FSET? ,HERE ,TOUCHBIT>>
@@ -949,3 +956,5 @@ around you as his last words echo through the void...." CR>
 	 <V-LOOK>
 	 <MAIN-LOOP>
 	 <AGAIN>>
+
+<GLOBAL CLEFT-QUEUED? <>>

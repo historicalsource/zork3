@@ -1,8 +1,6 @@
-"CLOCK for
-		     Zork III: The Dungeon Master 
-		 The Great Underground Empire (Part 3)
-	(c) Copyright 1982 Infocom, Inc.  All Rights Reserved.
-"
+"GCLOCK for
+			    The Zork Trilogy
+	 (c) Copyright 1983 Infocom, Inc.  All Rights Reserved"
 
 <CONSTANT C-TABLELEN 180>
 
@@ -19,11 +17,6 @@
 <CONSTANT C-TICK 1>
 
 <CONSTANT C-RTN 2>
-
-<ROUTINE DEMON (RTN TICK "AUX" CINT)
-	 #DECL ((RTN) ATOM (TICK) FIX (CINT) <PRIMTYPE VECTOR>)
-	 <PUT <SET CINT <INT .RTN T>> ,C-TICK .TICK>
-	 .CINT>
 
 <ROUTINE QUEUE (RTN TICK "AUX" CINT)
 	 #DECL ((RTN) ATOM (TICK) FIX (CINT) <PRIMTYPE VECTOR>)
@@ -42,7 +35,7 @@
 			<SET INT <REST ,C-TABLE ,C-INTS>>
 			<PUT .INT ,C-RTN .RTN>
 			<RETURN .INT>)
-		       (<==? <GET .C ,C-RTN> .RTN> <RETURN .C>)>
+		       (<EQUAL? <GET .C ,C-RTN> .RTN> <RETURN .C>)>
 		 <SET C <REST .C ,C-INTLEN>>>>
 
 <GLOBAL CLOCK-WAIT <>>
@@ -53,7 +46,9 @@
 	 <SET C <REST ,C-TABLE <COND (,P-WON ,C-INTS) (T ,C-DEMONS)>>>
 	 <SET E <REST ,C-TABLE ,C-TABLELEN>>
 	 <REPEAT ()
-		 <COND (<==? .C .E> <RETURN .FLG>)
+		 <COND (<==? .C .E>
+			<SETG MOVES <+ ,MOVES 1>>
+			<RETURN .FLG>)
 		       (<NOT <0? <GET .C ,C-ENABLED?>>>
 			<SET TICK <GET .C ,C-TICK>>
 			<COND (<0? .TICK>)

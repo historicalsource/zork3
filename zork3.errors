@@ -1,22 +1,31 @@
-Assembling ZORK3.XZAP.6
+Assembling ZORK3.XZAP.7 on Monday, August 11, 1986 18:22:44
+Release: 25
 
+    64	Inserting ZORK3FREQ.XZAP.2	   (622 bytes)
+   686	Inserting ZORK3DAT.ZAP.7	 (19276 bytes)
+ 19962	Inserting GSYNTAX.ZAP.11	     (0 bytes)
+ 19962	Inserting GMACROS.ZAP.10	   (119 bytes)
+ 20081	Inserting GCLOCK.ZAP.10	   (178 bytes)
+ 20259	Inserting GMAIN.ZAP.10	   (960 bytes)
+ 21219	Inserting GPARSER.ZAP.10	  (6675 bytes)
+ 27894	Inserting 3DUNGEON.ZAP.10	   (481 bytes)
+ 28375	Inserting GGLOBALS.ZAP.9	  (1364 bytes)
+ 29739	Inserting GVERBS.ZAP.9	 (10285 bytes)
+ 40024	Inserting 3ACTIONS.ZAP.8	 (35714 bytes)
+ 75738	Inserting ZORK3STR.ZAP.7	 (12246 bytes)
 
-Inserting ZORK3FREQ.XZAP.2	(  622 bytes)
-Inserting ZORK3DAT.ZAP.1	(17815 bytes)
-Inserting DUNGEON.ZAP.1	(    0 bytes)
-Inserting SYNTAX.ZAP.1	(    0 bytes)
-Inserting MACROS.ZAP.1	(   43 bytes)
-Inserting CLOCK.ZAP.1	(  197 bytes)
-Inserting MAIN.ZAP.2	( 1127 bytes)
-Inserting PARSER.ZAP.1	( 4864 bytes)
-Inserting DEMONS.ZAP.1	(  250 bytes)
-Inserting VERBS.ZAP.1	( 9396 bytes)
-Inserting ACTIONS.ZAP.1	(16227 bytes)
-Inserting TM.ZAP.1	( 7613 bytes)
-Inserting SHADOW.ZAP.1	(12014 bytes)
-Inserting ZORK3STR.ZAP.1	(12482 bytes)
-18501 bytes of preload.
+Symbols unused:
+MUNG-ROOM
+ZPROB
+WON-FLAG
+DUMMY
 
-82714 bytes (81K).
-222 objects.
-192 globals.
+228 objects.
+203 globals.
+600 word vocabulary.
+
+ 87984 bytes (86K).
+ 19962 bytes of preload.
+ 12548 bytes of impure.
+
+Outputting symbol tables

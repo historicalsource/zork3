@@ -11,6 +11,15 @@
 	 "An interesting idea..."
 	 "What a concept!">>
 
+<ROUTINE FIND-WEAPON (O "AUX" W)
+	 <SET W <FIRST? .O>>
+	 <COND (<NOT .W>
+		<RFALSE>)>
+	 <REPEAT ()
+		 <COND (<EQUAL? .W ,SWORD>
+			<RETURN .W>)
+		       (<NOT <SET W <NEXT? .W>>> <RFALSE>)>>>
+
 <ROUTINE SWORD-FCN ()
 	 <COND (,SWORD-IN-STONE?
 		<COND (<VERB? TAKE MOVE>
@@ -18,8 +27,7 @@
 			      <TELL
 "Who do you think you are? Arthur?" CR>)
 			     (T <TELL
-"The sword is deeply imbedded within the rock.  You can't even begin
-to budge it." CR>)>)>)
+"The sword is deeply imbedded in the rock. You can't budge it." CR>)>)>)
 	       (<AND <VERB? TAKE> <==? ,WINNER ,ADVENTURER>>
 		<ENABLE <QUEUE I-SWORD -1>>
 		<>)>>
@@ -35,8 +43,7 @@ to budge it." CR>)>)>)
 
 <ROUTINE LANTERN ()
 	 <COND (<VERB? THROW>
-		<TELL
-"The lamp has smashed into the floor, and the light has gone out." CR>
+		<TELL "The lamp smashes. The light is now out." CR>
 		<DISABLE <INT I-LANTERN>>
 		<REMOVE ,LAMP>
 		<SETG CURRENT-LAMP ,BROKEN-LAMP>
@@ -62,17 +69,10 @@ to budge it." CR>)>)>)
 		       <TELL "The lamp is turned off.">)>
 		<CRLF>)>>
 
-<ROUTINE I-LANTERN ("AUX" TICK (TBL <VALUE LAMP-TABLE>))
-	 <ENABLE <QUEUE I-LANTERN <SET TICK <GET .TBL 0>>>>
-	 <LIGHT-INT ,LAMP .TBL .TICK>
-	 <COND (<NOT <0? .TICK>>
-		<SETG LAMP-TABLE <REST .TBL 4>>)>
-	 <RTRUE>>
-
 <ROUTINE LIGHT-INT (OBJ TBL TICK)
 	 <COND (<0? .TICK>
-		<FCLEAR .OBJ ,LIGHTBIT>
-		<FCLEAR .OBJ ,ONBIT>)>
+		<FCLEAR .OBJ ,ONBIT>
+		<FSET .OBJ ,RMUNGBIT>)>
 	 <COND (<OR <HELD? .OBJ> <IN? .OBJ ,HERE>>
 		<COND (<0? .TICK>
 		       <TELL
@@ -80,22 +80,27 @@ to budge it." CR>)>)>)
 		      (T
 		       <TELL <GET .TBL 1> CR>)>)>>
 
-<ROUTINE CRETIN ()
-	 <COND (<VERB? GIVE>
-		<PERFORM ,V?TAKE ,PRSO>)
-	       (<VERB? EAT> <TELL "Auto-cannibalism is not the answer." CR>)
-	       (<VERB? KILL MUNG>
-		<JIGS-UP
-"If you insist.... Poof, you're dead!">)
-	       (<VERB? TAKE>
-		<TELL "How romantic!" CR>)
-	       (<VERB? DISEMBARK>
-		<TELL "You'll have to do that on your own." CR>)
-	       (<VERB? EXAMINE>
-		<TELL "That's difficult unless your eyes are prehensile."
-		      CR>)
-	       (<VERB? MAKE>
-		<TELL "Only you can do that." CR>)>>
+<ROUTINE I-LANTERN ("AUX" TICK (TBL <VALUE LAMP-TABLE>))
+	 <ENABLE <QUEUE I-LANTERN <SET TICK <GET .TBL 0>>>>
+	 <LIGHT-INT ,LAMP .TBL .TICK>
+	 <COND (<NOT <0? .TICK>>
+		<SETG LAMP-TABLE <REST .TBL 4>>)>>
+
+;<ROUTINE LIGHT-INT (OBJ INTNAM TBLNAM "AUX" (TBL <VALUE .TBLNAM>) TICK)
+	 #DECL ((OBJ) OBJECT (TBLNAM INTNAM) ATOM (TBL) <PRIMTYPE VECTOR>
+		(TICK) FIX)
+	 <ENABLE <QUEUE .INTNAM <SET TICK <GET .TBL 0>>>>
+	 <COND (<0? .TICK>
+		<FCLEAR .OBJ ,LIGHTBIT>
+		<FCLEAR .OBJ ,ONBIT>)>
+	 <COND (<OR <HELD? .OBJ> <IN? .OBJ ,HERE>>
+		<COND (<0? .TICK>
+		       <TELL
+"I hope you have more light than from the " D .OBJ "." CR>)
+		      (T
+		       <TELL <GET .TBL 1> CR>)>)>
+	 <COND (<NOT <0? .TICK>>
+		<SETG .TBLNAM <REST .TBL 4>>)>>
 
 <ROUTINE CHASM-FCN ()
 	 <COND (<OR <VERB? LEAP>
@@ -109,42 +114,11 @@ to budge it." CR>)>)>)
 "The " D ,PRSO " drops out of sight into the chasm." CR>
 		<REMOVE ,PRSO>)>>
 
-<ROUTINE PATH-OBJECT ()
-	 <COND (<VERB? TAKE FOLLOW>
-		<TELL "You must specify a direction to go." CR>)
-	       (<VERB? FIND>
-		<TELL "I can't help you there...." CR>)>>
-
 <ROUTINE TUNNEL-OBJECT ()
 	 <COND (<AND <VERB? THROUGH> <GETP ,HERE ,P?IN>>
 		<DO-WALK ,P?IN>
 		<RTRUE>)
 	       (T <PATH-OBJECT>)>>
-
-<ROUTINE GROUND-FCN ()
-	 <COND (<AND <VERB? PUT> <==? ,PRSI ,GROUND>>
-		<PERFORM ,V?DROP ,PRSO>
-		<RTRUE>)
-	       (<VERB? DIG>
-		<TELL "The ground is too hard for digging here." CR>)>>
-
-<ROUTINE GRUE-FUNCTION ()
-    <COND (<VERB? EXAMINE>
-	   <TELL
-"The grue is a sinister, lurking presence in the dark places of the
-earth. Its favorite diet is adventurers, but its insatiable
-appetite is tempered by its fear of light. No grue has ever been
-seen by the light of day, and few have survived its fearsome jaws
-to tell the tale." CR>)
-	  (<VERB? FIND>
-	   <TELL
-"There is no grue here, but I'm sure there is at least one lurking
-in the darkness nearby. I wouldn't let my light go out if I were
-you!" CR>)
-	  (<VERB? LISTEN>
-	   <TELL
-"It makes no sound but is always lurking in the darkness nearby." CR>)>>
-
 
 \
 
@@ -224,7 +198,7 @@ you!" CR>)
 	<SETG CP-MOVED <>>
 	<COND (<==? ,PRSO ,P?UP>
 	       <COND (<==? ,CPHERE 1>
-		      <COND (<==? <2 ,CPTABLE> -2>
+		      <COND (<==? <GET ,CPTABLE 2> -2>
 			     <TELL
 "With the help of the ladder, you exit the puzzle." CR>
 			     ,CP-ANTE)
@@ -264,7 +238,7 @@ you!" CR>)
 		     (<AND <L? .FX 0>
 			   <EQUAL? 0
 				   <GET ,CPTABLE <- ,CPHERE 6>>
-				   <GET ,CPTABLE <+ ,CPHERE 6 .FX>>>>
+				   <GET ,CPTABLE <+ <+ ,CPHERE 6> .FX>>>>
 		      <CPMOVE .FX>)
 		     (T
 		      <TELL "There is a wall there." CR>)>
@@ -300,15 +274,14 @@ you!" CR>)
 <ROUTINE CPANT-ROOM (RARG)
 	 <COND (<==? .RARG ,M-LOOK>
 		<TELL
-"This is a small square room, in the middle of which is a perfectly round
-hole">
+"This is a small square room, in the middle of which is a round hole">
 		<COND (<OR ,CPBLOCK-FLAG <NOT <==? ,YEAR ,YEAR-PRESENT>>>
 		       <TELL
 			" which is blocked by smooth sandstone." CR>)
 		      (T
 		       <TELL
 " through which you can discern the floor some ten feet below.
-The place under the hole is dark, but it appears to be completely enclosed
+The area under the hole is dark, but it appears to be completely enclosed
 in rock. In any event, it doesn't seem likely that you could climb back up.
 Exits are west and, up a few steps, north." CR>)>)>>
 
@@ -316,19 +289,22 @@ Exits are west and, up a few steps, north." CR>)>)>>
 
 <GLOBAL CPSOLVE-FLAG <>>
 
-<ROUTINE CPLADDER-OBJECT ("AUX" (FLG <>))
-	#DECL ((FLG) <OR FALSE ATOM>)
-	<COND (<OR <==? <GET ,CPTABLE <- ,CPHERE 1>> -3>
-		   <AND <==? <GET ,CPTABLE <+ ,CPHERE 1>> -2> <SET FLG T>>>
-	       <COND (<VERB? CLIMB-UP CLIMB-FOO>
-		      <COND (<AND .FLG <==? ,CPHERE 1>>
-		      	     <SETG CPSOLVE-FLAG T>
-			     <GOTO ,CP-ANTE>)
-			    (T
-			     <TELL
+<ROUTINE CPLADDER-OBJECT ()
+	 <COND (<==? <GET ,CPTABLE <- ,CPHERE 1>> -3>
+		<CPLADDER-JUNK <>>)
+	       (<==? <GET ,CPTABLE <+ ,CPHERE 1>> -2>
+		<CPLADDER-JUNK T>)
+	       (T <TELL "I can't see any ladder here." CR>)>>
+
+<ROUTINE CPLADDER-JUNK (FLG)
+	 <COND (<VERB? CLIMB-UP CLIMB-FOO>
+		<COND (<AND .FLG <==? ,CPHERE 1>>
+		       <SETG CPSOLVE-FLAG T>
+		       <GOTO ,CP-ANTE>)
+		      (T
+		       <TELL
 "You hit your head on the ceiling and fall off the ladder." CR>)>)
-		     (T <TELL "Come, come!" CR>)>)
-	      (T <TELL "I can't see any ladder here." CR>)>> 
+	       (T <TELL "Come, come!" CR>)>> 
 
 <ROUTINE CPWALL-OBJECT ("AUX" WL NWL NXT NNXT CNT TOP (SNAP <>))
 	#DECL ((NXT WL NNXT NWL) FIX (UVEC) <UVECTOR [REST FIX]>)
@@ -360,15 +336,16 @@ descriptions will be diagrams of the immediate vicinity in a 3x3
 grid. The walls here are rock, but of two different types - sandstone
 and marble. The following notations will be used:|
 ">
-			     <PUT 0 8 <BOR <GET 0 8> 2>>
-			     <TELL "|
+			     <FIXED-FONT-ON>
+			     <TELL
+"|
   ..  = your position (middle of grid)|
   MM  = marble wall|
   SS  = sandstone wall|
   ??  = unknown (blocked by walls)|
 |
 ">
-			     <PUT 0 8 <BAND <GET 0 8> -3>>)>
+			     <FIXED-FONT-OFF>)>
 		      <SETG CPPUSH-FLAG T>
 		      <PUT ,CPTABLE .NXT 0>
 		      <PUT ,CPTABLE .NNXT .WL>
@@ -389,7 +366,11 @@ and marble. The following notations will be used:|
 			     <SETG CPBLOCK-FLAG T>)>
 		      <CPGOTO .NXT>)>)>>
 
-; "Flag for blocking of main entrance"
+<ROUTINE FIXED-FONT-ON () <PUT 0 8 <BOR <GET 0 8> 2>>>
+
+<ROUTINE FIXED-FONT-OFF() <PUT 0 8 <BAND <GET 0 8> -3>>>
+
+"Flag for blocking of main entrance"
 
 <GLOBAL CPBLOCK-FLAG <>>
 
@@ -475,7 +456,7 @@ marble walls and to the east and south with sandstone walls." CR>)>)>>
 			 (E <CPEW <+ ,CPHERE 1> 1>)
 			 (W <CPEW <+ ,CPHERE -1> 0>))
 	#DECL ((N S E W) FIX)
-	<PUT 0 8 <BOR <GET 0 8> 2>>
+	<FIXED-FONT-ON>
 	<TELL "      +">			      ;"Top Row"
 	<CP-CORNER ,MINUS-SEVEN .N .W>
 	<TELL " ">
@@ -495,7 +476,7 @@ marble walls and to the east and south with sandstone walls." CR>)>)>>
 	<TELL " ">
 	<CP-CORNER 7 .S .E>
 	<TELL "+" CR>
-	<PUT 0 8 <BAND <GET 0 8> -3>>
+	<FIXED-FONT-OFF>
 	<COND (<==? ,CPHERE 1>
 	       <TELL
 "In the ceiling above you is a large circular opening." CR>)
@@ -517,7 +498,7 @@ On one side of the door is a narrow slot." CR>)>
 	       <TELL
 "There is a ladder here, firmly attached to the west wall." CR>)>>
 
-;"Show where the eight nearest neighbors are located" 
+"Show where the eight nearest neighbors are located" 
 
 <ROUTINE CP-ORTHO (CONTENTS)
 	#DECL ((CONTENTS) FIX)
@@ -548,31 +529,30 @@ On one side of the door is a narrow slot." CR>)>
 	       <COND (<==? ,PRSO ,LORE-BOOK>
 	       	      <SETG CP-FLAG T>
 	              <TELL
-"The book drops easily into the slot and vanishes.  The metal door slides
-open, revealing a passageway to the west, as a previously unseen sign flashes:|
+"The book drops into the slot and vanishes. The metal door slides
+open, revealing a passageway to the west, and a sign flashes:|
     \"Royal Puzzle Exit Fee Paid|
           Item Confiscated\"" CR>)
-		     (<OR <FSET? ,PRSO ,VICBIT>
-			  <FSET? ,PRSO ,VILLAIN>>
-		      <TELL <PICK-ONE ,YUKS> CR>)
+		     (<FSET? ,PRSO ,ACTORBIT>
+		      <TELL <RANDOM-ELEMENT ,YUKS> CR>)
 		     (T
 		      <TELL
-"The item vanishes into the slot.  A moment later, a previously
-unseen sign flashes \"Garbage In, Garbage Out\" and spews
-the " D ,PRSO " (now atomized) through the slot." CR>)>)>>
+"The item vanishes into the slot. A moment later, a previously
+unseen sign flashes \"Garbage In, Garbage Out\" and spews out
+the " D ,PRSO " (now atomized)." CR>)>)>>
 	     
 <ROUTINE CPOUT-ROOM (RARG)
 	<COND (<==? .RARG ,M-LOOK>
 	       <TELL
 "You are in a narrow room, lit from above. A flight of steps leads up
-toward the north, and a ">
+to the north, and a ">
 	       <COND (,CP-FLAG <TELL "passage">)
 		     (T <TELL "metal door">)>
 	       <TELL " leads to the east." CR>)>>
 
 "Old end-game stuff"
 
-"SUBTITLE It's All Done with Mirrors"
+;"SUBTITLE It's All Done with Mirrors"
 
 <GLOBAL MLOC <>>
 
@@ -676,23 +656,22 @@ which once contained a mirror.")>
 
 <GLOBAL GUARDSTR
 ", identical stone statues face each other from
-pedestals on opposite sides of the corridor.  The statues represent
-Guardians of Zork, a military order of ancient lineage.  They are
-portrayed as heavily armored warriors standing at ease, hands clasped
-around formidable bludgeons.">
+pedestals on opposite sides of the corridor. The statues represent
+Guardians of Zork, a military order of ancient lineage. They are
+portrayed as heavily armored warriors clasping formidable bludgeons.">
 
 <ROUTINE LOOK-TO (RMN RMS "AUX" (NORTH? <>) (NTELL <>) (STELL <>)
 		  		MIR? (M1? <>) DIR)
 	 <COND (<NOT <EQUAL? ,HERE ,MREYE ,FRONT-DOOR>>
 		<TELL
-"This is a part of the long hallway.  The east and west walls are
-dressed stone.  In the center of the hall is a shallow stone channel.
+"This is a part of the long hallway. The east and west walls are
+dressed stone. In the center of the hall is a shallow stone channel.
 In the center of the room the channel widens into a large hole around
 which is engraved a compass rose." CR>)>
 	 <COND (<==? ,HERE ,MRG>
 		<SETG GUARDIANS-SEEN T>
 		<TELL
-"On either side of you are identical stone statues holding bludgeons.  They
+"On either side of you are identical stone statues holding bludgeons. They
 appear ready to strike, though, for the moment, they remain impassive." CR>)
 	       (<==? ,HERE ,MRC>
 	        <SETG GUARDIANS-SEEN T>
@@ -784,23 +763,31 @@ hallways to the ">
 From here, it's hard to tell which of the two is a reflection!" CR>)>)
 	       (<AND <==? .RARG ,M-ENTER> <NOT ,INVIS>>
 	        <JIGS-UP
-"The Guardians awake, and in perfect unison, utterly destroy you with
-their stone bludgeons.  Satisfied, they resume their posts.">)
+"The Guardians awake, and in perfect unison, pulverize you with
+their bludgeons. Satisfied, they resume their posts.">)
 	       (<NOT <==? .RARG ,M-END>> <RFALSE>)
 	       (<VERB? EXAMINE>
 		<COND (<==? ,HERE ,IN-MIRROR>
 		       <TELL "You can't see them from here." CR>)
 		      (T <TELL
-"The guardians are quite impressive.  I wouldn't get in their way if
+"The Guardians are quite impressive. I wouldn't get in their way if
 I were you!" CR>)>)
 	       (<AND <VERB? THROW> <==? ,PRSI ,GUARDIAN>>
+		<COND (<EQUAL? ,PRSO ,ME>
+		       <TELL "You step">)
+		      (T
+		       <TELL "The " D ,PRSO " falls">
+		       <REMOVE ,PRSO>)>
 		<TELL
-"The " D ,PRSO " flies within sight of the guardians, who, in perfect
-unison, destroy it utterly.  Satisfied, they resume their posts." CR>
-		<REMOVE ,PRSO>)
+" in front of the Guardians, who ">
+		<COND (<EQUAL? ,PRSO ,ME>
+		       <TELL "decimate you">)
+		      (T <TELL "destroy it">)>
+		<TELL " in perfect
+unison. Satisfied, they resume their posts." CR>)
 	       (<VERB? ATTACK>
 	        <TELL
-"You aren't close enough to fight them and even if you were, the contest
+"You aren't close enough, and even if you were, the fight
 would be a bit one-sided." CR>)
 	       (<VERB? HELLO>
 	        <TELL "The statues are impassive." CR>)>>
@@ -865,14 +852,14 @@ would be a bit one-sided." CR>)
 		       <COND (,MR1-FLAG
 			      <SETG MR1-FLAG <>>
 			      <TELL
-"The mirror breaks, revealing a wooden panel behind it.  The glistening
+"The mirror breaks, revealing a wooden panel behind it. The glistening
 fragments of mirror quietly sparkle into nonexistance." CR>)
 			     (T <TELL "The mirror has already been broken."
 				      CR>)>)
 		      (,MR2-FLAG
 		       <SETG MR2-FLAG <>>
 		       <TELL
-"The mirror breaks, revealing a wooden panel behind it.  The glistening
+"The mirror breaks, revealing a wooden panel behind it. The glistening
 fragments of mirror quietly sparkle into nonexistance." CR>)
 		      (T <TELL "The mirror has already been broken." CR>)>)
 	       (<OR <AND <==? .MIRROR 1> <NOT ,MR1-FLAG>> <NOT ,MR2-FLAG>>
@@ -881,26 +868,23 @@ fragments of mirror quietly sparkle into nonexistance." CR>)
 	       (<VERB? PUSH>
 	        <TELL <COND (<==? .MIRROR 1>
 "The mirror is mounted on a wooden panel which moves slightly inward
-as you push, and back out when you let go.  The mirror feels fragile.")
+as you push, and back out when you let go. It feels fragile.")
 			    (T
-"The mirror is unyielding, but seems rather fragile.")> CR>)>>
+"The mirror is unyielding, but seems fragile.")> CR>)>>
 
 <ROUTINE PANEL-FUNCTION ("AUX" MIRROR)
  	 <COND (<NOT <SET MIRROR <MIRROR-HERE? ,HERE>>>
 	        <TELL "I can't see any panel here." CR>)
 	       (<VERB? OPEN MOVE>
-	        <TELL
-"I don't see a way to open the panel here." CR>)
+	        <TELL "I don't see a way to open the panel here." CR>)
 	       (<VERB? MUNG>
 	        <COND (<==? .MIRROR 1>
 		       <COND (,MR1-FLAG
-			      <TELL
-"To break the panel you would have to break the mirror first." CR>)
+			      <TELL ,MIRROR-FIRST CR>)
 			     (T <TELL
 "The panel is not that easily destroyed." CR>)>)
 		      (,MR2-FLAG
-		       <TELL
-"To break the panel you would have to break the mirror first." CR>)
+		       <TELL ,MIRROR-FIRST CR>)
 		      (T <TELL "The panel is not that easily destroyed." CR>)>)
 	       (<VERB? PUSH>
 	        <TELL <COND (<==? .MIRROR 1>
@@ -908,6 +892,9 @@ as you push, and back out when you let go.  The mirror feels fragile.")
 when you let go.")
 			    (T
 "The panel is unyielding.")> CR>)>>
+
+<GLOBAL MIRROR-FIRST
+"To break the panel you would have to break the mirror first.">
 
 <GLOBAL DIRVEC <LTABLE P?NORTH 0 P?NE 45 P?EAST 90 P?SE 135
 		       P?SOUTH 180 P?SW 225 P?WEST 270 P?NW 315>>
@@ -921,7 +908,9 @@ when you let go.")
 		       <COND (<0? <MOD ,MDIR 180>>
 			      <MIREW>)
 			     (T <MIRNS <L? ,MDIR 180> T>)>)
-		      (T <RFALSE>)>)
+		      (T
+		       <TELL "There's a wall there.">
+		       <RFALSE>)>)
 	       (,WOOD-OPEN-FLAG
 	        <COND (<OR <==? .DIR 1>
 			   <==? <MOD <+ ,MDIR 180> 360> .DIR>>
@@ -986,12 +975,11 @@ beam of light." CR>)
 	       (<==? .RARG ,M-LOOK>
 	        <TELL
 "You are in the middle of a long north-south corridor whose walls are
-polished stone.  A narrow red beam of light crosses the room at the north
+polished stone. A narrow red beam of light crosses the room at the north
 end, inches above the floor." CR>
 	        <COND (<SET O <BEAM-STOPPED?>>
 		       <TELL
-"The beam is stopped halfway across the room by a " D .O
-" lying on the floor." CR>)>
+"The beam is blocked by a " D .O " lying on the floor." CR>)>
 		<LOOK-TO ,MRA <>>)>>
 
 <ROUTINE BEAM-STOPPED? ("AUX" N)
@@ -1022,8 +1010,7 @@ follow it." CR>)
 above the floor.">
 		<COND (<BEAM-STOPPED?>
 		       <TELL " The beam is broken by a " D ,BEAM-BREAKER
-			     " lying on
-the ground.">)>
+			     " lying on the ground.">)>
 		<CRLF>)
 	       (<VERB? PUT MUNG>
 	        <COND (<VERB? PUT>
@@ -1087,37 +1074,37 @@ the ground.">)>
 	 <COND (<==? .RARG ,M-LOOK>
 	        <TELL
 "You are inside a rectangular box of wood whose structure is rather
-complicated.  Four sides and the roof are filled in, and the floor is
+complicated. Four sides and the roof are filled in, and the floor is
 open.|
 |
 As you face the side opposite the entrance, two short sides of
-carved and polished wood are to your left and right.  The left panel
-is mahogany, the right pine.  The wall you face is red on its left
-half and black on its right.  On the entrance side, the wall is white
+carved and polished wood are to your left and right. The left panel
+is mahogany, the right pine. The wall you face is red on its left
+half and black on its right. On the entrance side, the wall is white
 opposite the red part of the wall it faces, and yellow opposite the
-black section.  The painted walls are at least twice the length of
-the unpainted ones.  The ceiling is painted blue.|
+black section. The painted walls are at least twice the length of
+the unpainted ones. The ceiling is painted blue.|
 |
 In the floor is a stone channel about six inches wide and a foot
-deep.  The channel is oriented in a north-south direction.  In the
+deep. The channel is oriented in a north-south direction. In the
 exact center of the room the channel widens into a circular
-depression perhaps two feet wide.  Incised in the stone around this
+depression perhaps two feet wide. Incised in the stone around this
 area is a compass rose.|
 |
 Running from one short wall to the other at about waist height
-is a wooden bar, carefully carved and drilled.  This bar is pierced
-in two places.  The first hole is in the center of the bar (and thus
-the center of the room).  The second is at the left end of the room
-(as you face opposite the entrance).  Through each hole runs a wooden
+is a wooden bar, carefully carved and drilled. This bar is pierced
+in two places. The first hole is in the center of the bar (and thus
+the center of the room). The second is at the left end of the room
+(as you face opposite the entrance). Through each hole runs a wooden
 pole.|
 |
 The pole at the left end of the bar is short, extending about a foot
-above the bar, and ends in a hand grip.  The pole ">
+above the bar, and ends in a hand grip. The pole ">
 	        <COND (<AND <==? ,MLOC ,MRB> <==? ,MDIR 270>>
 		       <COND (<NOT <0? ,POLEUP-FLAG>>
 			      <TELL
 "has been lifted out
-of a hole carved in the stone floor.  There is evidently enough
+of a hole carved in the stone floor. There is evidently enough
 friction to keep the pole from dropping back down.">)
 			     (T
 			      <TELL "has been dropped
@@ -1136,9 +1123,9 @@ stone floor.">)>
 "|
 |
 The long pole at the center of the bar extends from the ceiling
-through the bar to the circular area in the stone channel.  This
+through the bar to the circular area in the stone channel. This
 bottom end of the pole has a T-bar a bit less than two feet long
-attached to it, and on the T-bar is carved an arrow.  The arrow and
+attached to it, and on the T-bar is carved an arrow. The arrow and
 T-bar are pointing "
 		     <GET ,LONGDIRS </ ,MDIR 45>>
 		     ".">
@@ -1160,7 +1147,7 @@ The pine panel has been opened outward.">)>
 			      <COND (,GUARDIANS-SEEN
 				     <JIGS-UP
 "The Guardians awake, and in perfect unison, utterly destroy you with
-their stone bludgeons.  Satisfied, they resume their posts.">
+their stone bludgeons. Satisfied, they resume their posts.">
 				     <RTRUE>)
 				    (T
 				     <JIGS-UP
@@ -1218,7 +1205,7 @@ budge." CR>)>)
 Zork, represented by two identical stone statues carrying bludgeons." CR>)>
 			      <JIGS-UP
 "The Guardians awake, and in perfect unison, utterly destroy you with
-their stone bludgeons.  Satisfied, they resume their posts.">
+their stone bludgeons. Satisfied, they resume their posts.">
 			      <RTRUE>)>
 		       <SETG WOOD-OPEN-FLAG T>
 		       <ENABLE <QUEUE I-PININ 5>>)>)>>
@@ -1246,19 +1233,18 @@ their stone bludgeons.  Satisfied, they resume their posts.">
 		       <COND (,GUARDIANS-SEEN
 			      <JIGS-UP
 "Suddenly the Guardians realize someone is trying to sneak by them in
-the structure.  They awake and, in perfect unison, hammer the contents
-of the box (in other words you) to pulp.  They then resume their posts,
+the structure. They awake and, in perfect unison, hammer the contents
+of the box (in other words you) to pulp. They then resume their posts,
 satisfied.">)
 			     (T
 			      <JIGS-UP
-"Suddenly, two identical stone hands holding tremendous bludgeons come
-through the top of the structure and hammer the contents of the box to pulp.
-That includes you.">)>)>
+"Suddenly, two identical stone bludgeons come through the roof and
+hammer the contents of the box to pulp. That includes you.">)>)>
 		<RTRUE>)>
 	 T>	
 
 <ROUTINE SHORT-POLE-F ()
-         <COND (<VERB? RAISE>
+         <COND (<VERB? RAISE MOVE>
 	        <COND (<==? ,POLEUP-FLAG 2>
 		       <TELL "The pole cannot be raised further." CR>)
 		      (T
@@ -1328,8 +1314,8 @@ That includes you.">)>)>
 		       <TELL
 "The dungeon master appears angered. \"Do not run from your quest: you are
 nearing the end!\"" CR>)
-		      (<VERB? PUSH TURN SPIN FOLLOW STAY OPEN CLOSE KILL WAIT
-			      WALK-TO>
+		      (<VERB? PUSH TURN SPIN FOLLOW STAY OPEN CLOSE WAIT
+			      ATTACK WALK-TO>
 		       <COND (<VERB? STAY FOLLOW WAIT> T)
 			     (T <TELL "\"If you wish,\" he replies." CR>)>
 		       <RFALSE>)
@@ -1338,14 +1324,13 @@ nearing the end!\"" CR>)
 	       (<VERB? EXAMINE>
 		<TELL
 "He is dressed simply in a hood and cloak, wearing an amulet and ring,
-carrying an old book under one arm, and leaning on a wooden staff.  A single
+carrying an old book under one arm, and leaning on a wooden staff. A single
 key, as if to a prison cell, hangs from his belt." CR>)
-	       (<VERB? ATTACK KILL MUNG>
+	       (<VERB? ATTACK MUNG>
 		<REALLY-DEAD
-"The dungeon master is taken momentarily by surprise.  He dodges your
-blow, and then, with a disappointed expression on his face, he raises
-his staff, and traces a complicated pattern in the air.  As it completes
-you crumble into dust.">)
+"The dungeon master is taken by surprise. He dodges your blow, and
+with a disappointed expression on his face, traces a complicated
+pattern in the air with his staff. You crumble into dust.">)
 	       (<VERB? TAKE>
 		<TELL
 "\"I'm willing to accompany you, but not ride in your pocket!\"" CR>)
@@ -1376,8 +1361,8 @@ you crumble into dust.">)
 		<SETG DM-SEEN T>)
 	       (<==? .RARG ,M-LOOK>
 		<TELL
-"You are in a narrow north-south corridor.  At the south end is a door
-and at the north end is an east-west corridor.  The door is ">
+"You are in a narrow north-south corridor. At the south end is a door
+and at the north end is an east-west corridor. The door is ">
 		<DPR ,DUNGEON-DOOR>)>>
 
 <ROUTINE FRONT-DOOR-F ("OPTIONAL" (RARG <>))
@@ -1386,7 +1371,7 @@ and at the north end is an east-west corridor.  The door is ">
 	       (<==? .RARG ,M-LOOK>
 		<LOOK-TO <> ,MRD>
 		<TELL
-"The wooden door has a barred panel in it at about head height.  The
+"The wooden door has a barred panel in it at about head height. The
 door itself is ">
 	        <DPR ,DUNGEON-DOOR>)>>
 
@@ -1399,44 +1384,48 @@ door itself is ">
 	      <IN? ,LORE-BOOK ,WINNER>
 	      <IN? ,KEY ,WINNER>>>
 
+<ROUTINE DUNGEON-PANEL-F ()
+	 <COND (<VERB? OPEN>
+		<TELL "You can't open the panel. It's set into the door." CR>)
+	       (<VERB? LOOK-INSIDE>
+		<TELL "There's not much to be seen." CR>)>>
+
 <ROUTINE DUNGEON-DOOR-F ()
     	 <COND (<VERB? OPEN CLOSE>
 		<TELL "The door won't budge." CR>)
 	       (<AND <VERB? KNOCK> <EQUAL? ,HERE ,FRONT-DOOR>>
 		<TELL
-"The knock reverberates along the hall.  For a time it seems there
-will be no answer.  Then you hear someone unlatching the small
-wooden panel.  Through the bars of the great door, the wrinkled
+"The knock reverberates along the hall. For a time it seems there
+will be no answer. Then you hear someone unlatching the small
+panel. Through the bars of the great door, the wrinkled
 face of an old man appears.">
 		<COND (,INVIS
-		       <TELL " He seems not to take notice of you for
+		       <TELL " He seems not to notice you
 for a brief moment, then recovers.">)>
 		<COND (<LOOK-LIKE-DM?>
-		       <TELL " After a moment, he starts to smile
-broadly.  He disappears for an instant and the massive door opens
-without a sound.  The old man motions and you feel yourself drawn toward him.|
+		       <TELL " He starts to smile broadly and opens the
+massive door without a sound. The old man motions and you feel yourself
+drawn toward him.|
 \"I am the Master of the Dungeon!\" he booms. \"I have been watching
 you closely during your journey through the Great Underground Empire.
 Yes!,\" he says, as if recalling some almost forgotten time, \"we have
-met before, although I may not appear as I did then.\"  You look
+met before, although I may not appear as I did then.\" You look
 closely into his deeply lined face and see the faces of the old man by the
-secret door, your \"friend\" at the cliff, and the hooded figure.  \"You have
-shown kindness to the old man, and compassion toward the hooded one.  I have
-seen you display patience in the puzzle and trust at the cliff.  You have
-demonstrated strength, ingenuity, and valor.  However, one final test awaits
-you.  Now!  Command me as you will, and complete your quest!\"|
-" CR>
+secret door, your \"friend\" at the cliff, and the hooded figure. \"You have
+shown kindness to the old man, and compassion toward the hooded one. You
+displayed patience in the puzzle and trust at the cliff. You have
+demonstrated strength, ingenuity, and valor. However, one final test awaits
+you. Now! Command me as you will, and complete your quest!\"|" CR>
 		       <GOTO ,BEHIND-DOOR>
 		       <SETG IN-DUNGEON T>)
 		      (T
-		       <TELL " He looks you over with his keen,
-piercing gaze and then speaks gravely.  \"I have been waiting a long time
-for you, ">
+		       <TELL " He looks you over with a piercing gaze
+and then speaks gravely. \"I have been waiting a long time for you, ">
 		       <TELL <GET ,DM-REASONS <DMISH>>>
 		       <TELL "
 I will remain here. When you feel you are ready, go to the
-secret door and 'SAY \"FROTZ OZMOO\"'!  Go, now!\" He starts to leave but
-turns back briefly and wags his finger in warning. \"Do not forget the double
+secret door and 'SAY \"FROTZ OZMOO\"'! Go, now!\" He wags his finger
+in warning. \"Do not forget the double
 quotes!\" A moment later, you find yourself in the Button Room." CR>
 		       <GOTO ,MR-ANTE <>>
 		       <RTRUE>)>)>>
@@ -1444,12 +1433,12 @@ quotes!\" A moment later, you find yourself in the Button Room." CR>
 <GLOBAL IN-DUNGEON <>>
 
 <GLOBAL DM-REASONS <TABLE
-"but I fear my waiting may be in vain.  I must not give up hope!"
+"but I fear my waiting may be in vain."
 "but you have far to go before you are ready."
-"and you seem to have made some progress, albeit slight."
-"and your journey is half complete.  Be of good cheer!"
-"and you are coming nearer the end of your long quest!"
-"and it will not be long yet before you are ready!"
+"and you seem to have made slight some progress."
+"and your journey is half complete. Be of good cheer!"
+"and you are nearing the end of your long quest!"
+"and it will not be long before you are ready!"
 "and you are nearly ready for the last test!">>
 
 <ROUTINE DMISH ("AUX" (CNT 0))
@@ -1545,15 +1534,15 @@ quotes!\" A moment later, you find yourself in the Button Room." CR>
 <ROUTINE PARAPET-F (RARG)
 	 <COND (<==? .RARG ,M-LOOK>
 	        <TELL
-"You are standing behind a stone retaining wall which rims a large
-parapet overlooking a fiery pit.  It is difficult to see through the
-smoke and flame which fills the pit, but it seems to be more or less
-bottomless.  The pit itself is circular, about two hundred feet in diameter,
-and is fashioned of roughly hewn stone.  The flames generate considerable
+"You are standing behind a stone retaining wall which rims a parapet
+overlooking a fiery pit. It is difficult to see through the
+smoke and flame which fills the pit, but it seems to be bottomless.
+The pit itself is circular, about two hundred feet in diameter,
+and is fashioned of roughly hewn stone. The flames generate considerable
 heat, so it is rather uncomfortable standing here.|
-There is an object here which looks like a sundial.  On it are an
-indicator arrow and (in the center) a large button.  On the face of
-the dial are numbers 1 through 8.  The indicator points to the number "
+There is an object here which looks like a sundial. On it are an
+indicator arrow surrounding a large button. On the face of
+the dial are numbers 1 through 8. The indicator points to the number "
 N ,PNUMB "." CR>
 		<TELL
 "To the south, across a narrow corridor, is a prison cell." CR>)>>
@@ -1597,19 +1586,19 @@ N ,PNUMB "." CR>
 <ROUTINE CELL-ROOM (RARG)
          <COND (<==? .RARG ,M-LOOK>
 	        <TELL
-"You are in a featureless prison cell.  You can see ">
+"You are in a featureless prison cell. You can see ">
 		<COND (<FSET? ,CELL-DOOR ,OPENBIT>
 		       <TELL "an east-west
-corridor outside the open wooden door in front of you. Your view
-also takes in the parapet, and behind, a large, fiery pit." CR>)
+corridor outside the cell door. Your view also takes in the parapet and
+a large, fiery pit." CR>)
 		      (T
 		       <TELL "through the small window
-in the closed door in front of you the parapet, and, behind that,
+in the closed door the parapet, and, behind that,
 smoke and flames rising from a fiery pit." CR>)>
 		<COND (<IN? ,DUNGEON-MASTER ,PARAPET>
 		       <TELL
-"The dungeon master is standing on the parapet, leaning on his wooden
-staff.  His keen gaze is fixed on you and he looks somewhat tense,
+"The dungeon master is at the parapet, leaning on his
+staff. His keen gaze is fixed on you and he looks tense,
 as if waiting for something to happen." CR>)> 
 	        <COND (<==? ,LCELL 4>
 		       <TELL
@@ -1620,8 +1609,8 @@ as if waiting for something to happen." CR>)>
 <ROUTINE NCELL-ROOM (RARG)
          <COND (<==? .RARG ,M-LOOK>
 	        <TELL
-"You are in a bare prison cell.  Its wooden door is securely fastened,
-and you can see only flames and smoke through its small window.  On the
+"You are in a bare prison cell. Its wooden door is securely fastened,
+and you can see only flames and smoke through its small window. On the
 south wall is a bronze door which seems to be ">
 	        <DPR ,BRONZE-DOOR>)>>
 
@@ -1633,18 +1622,18 @@ south wall is a bronze door which seems to be ">
 	 <COND (<==? .RARG ,M-LOOK>
 	        <TELL
 "This is a wide east-west corridor which opens onto a northern
-parapet at its center.  You can see flames and smoke as you peer
-towards the parapet.  The corridor turns south at either end, and in
+parapet at its center. You can see flames and smoke as you peer
+towards the parapet. The corridor turns south at either end, and in
 the center of the south wall is a heavy wooden door with a small
-window barred with iron.  The door is ">
+barred window. The door is ">
 		<DPR ,CELL-DOOR>)>>
 
 <ROUTINE SOUTH-CORRIDOR-F (RARG)
 	 <COND (<==? .RARG ,M-LOOK>
 	        <TELL
 "You are in an east-west corridor which turns north at its eastern
-and western ends.  The walls are made of the finest marble.  An
-additional passage leads south at the center of the corridor." CR>
+and western ends. The walls are made of the finest marble. Another
+hall leads south at the center of the corridor." CR>
 	       <COND (<==? ,LCELL 4>
 		      <TELL
 "In the center of the north wall is a bronze door which is ">
@@ -1672,12 +1661,12 @@ into a larger area." CR>
 
 \
 
-"=========== The Ultimate Winnage =========="
+"========== The Ultimate Winnage =========="
 
 <ROUTINE NIRVANA-F (RARG)
 	 <COND (<==? .RARG ,M-END>
 	        <TELL
-"As you gleefully examine your new-found riches, the Dungeon Master
+"As you examine your new-found riches, the Dungeon Master
 materializes beside you, and says, \"Now that you have solved all the
 mysteries of the Dungeon, it is time for you to assume your rightly-earned
 place in the scheme of things. Long have I waited for one capable of
@@ -1712,9 +1701,8 @@ and lore at your command and thirst for an opportunity to use them.|
 <GLOBAL OLD-MAN-FED <>>
 
 <GLOBAL SECRET-DOOR-DESC
-"Beyond the once-secret door are dark, forbidding stairs that lead down to
-a passage below.  Dim light, as from torches, can be seen in the
-passage.">
+"Beyond the secret door are dark, forbidding stairs leading down to
+a passage below. Flickering torchlight illuminates the passage.">
 
 <ROUTINE SECRET-DOOR-F ()
 	 <COND (<AND <VERB? OPEN> <NOT <FSET? ,SECRET-DOOR ,OPENBIT>>>
@@ -1730,14 +1718,14 @@ passage.">
 		<MOVE ,OLD-MAN ,HERE>)
 	       (<==? .RARG ,M-LOOK>
 		<TELL
-"You are in a room with passages heading southwest and southeast.  The
+"You are in a room with passages heading southwest and southeast. The
 north wall is ornately carved, filled with strange runes and writing in
 an unfamiliar language." CR>
 		<COND (<FSET? ,SECRET-DOOR ,OPENBIT>
 		       <TELL ,SECRET-DOOR-DESC CR>)
 		      (<NOT <FSET? ,SECRET-DOOR ,INVISIBLE>>
 		       <TELL
-"The outline of a door is barely visible on the surface of the rock." CR>)>)>>
+"The outline of a door is barely visible among the runes." CR>)>)>>
 
 <ROUTINE HELLO? (WHO)
 	 <COND (<OR <==? ,WINNER .WHO>
@@ -1752,21 +1740,21 @@ an unfamiliar language." CR>
 		<COND (,OLD-MAN-AWAKE
 		       <TELL
 "There is an old man huddled in the corner, eyeing you cautiously.
-He seems weak and tired, and nods off frequently." CR>)
+He looks weak and tired." CR>)
 		      (T
 		       <TELL
-"An old and wizened man is huddled, asleep, in the corner.  He is snoring
-loudly.  From his appearance, he is weak and frail." CR>)>)
+"An old and wizened man is huddled, asleep, in the corner. He is snoring
+loudly, and looks quite weak and frail." CR>)>)
 	       (<AND <VERB? GIVE> <==? ,PRSI ,OLD-MAN>>
 		<COND (,OLD-MAN-AWAKE
 		       <COND (<==? ,PRSO ,WAYBREAD>
 			      <REMOVE ,WAYBREAD>
 			      <TELL
-"He looks up at you and takes the waybread from you. Slowly, he eats the
+"He looks up at you and takes the waybread. Slowly, he eats the
 bread and pauses when he is finished. He starts to speak: \"Perhaps what you
 seek is through there!\" He points at the carved wall to the north, where you
-now notice the bare outline of a secret door. When you turn back to the old
-man, you notice that he has gone!" CR>
+now notice the bare outline of a secret door. When you turn back, the old
+man is gone!" CR>
 			      <FCLEAR ,SECRET-DOOR ,INVISIBLE>
 			      <SETG OLD-MAN-GONE T>
 			      <REMOVE ,OLD-MAN>)
@@ -1782,11 +1770,10 @@ hand." CR>)
 		<COND (,OLD-MAN-AWAKE
 		       <TELL
 "The old man is barely awake and appears to nod off every few moments.
-He has bright eyes, which, when open, appear to see right through your
-body." CR>)
+He has bright eyes, which appear to see right through your body." CR>)
 		      (T
 		       <TELL
-"The man is very, very old and wizened.  He has a long, stringy
+"The man is very, very old and wizened. He has a long, stringy
 beard and is snoring quite loudly." CR>)>)
 	       (<VERB? LISTEN>
 		<COND (,OLD-MAN-AWAKE <TELL "He isn't talking." CR>)
@@ -1802,12 +1789,12 @@ beard and is snoring quite loudly." CR>)>)
 "He is sleeping soundly and does not respond." CR>)>)
 	       (<VERB? SHAKE ALARM>
 		<TELL
-"The old man is roused to consciousness.  He peers at you through eyes which
+"The old man is roused to consciousness. He peers at you through eyes which
 appear much younger and stronger than his frail body and waits, as if expecting
 something to happen." CR>
 		<SETG OLD-MAN-AWAKE T>
 		<ENABLE <QUEUE I-OLD-MAN-SLEEPS 3>>)
-	       (<VERB? KILL ATTACK MUNG>
+	       (<VERB? ATTACK MUNG>
 		<TELL
 "The attack seems to have left the old man unharmed! You watch in awe as he
 rises to his feet and seems to tower above you. He peers down menacingly,
@@ -1826,14 +1813,14 @@ smoke." CR>
 <ROUTINE RUNES-F ()
 	 <COND (<VERB? EXAMINE READ>
 		<TELL
-"The runes are in an ancient language. Some pictures, among
-the runes, depict flames, stone statues, and figures of old men." CR>)>>
+"The runes are in an ancient language. Some pictures among the runes depict
+flames, stone statues, and an old man." CR>)>>
 
 <ROUTINE T-BAR-F ()
 	 <COND (<VERB? TURN>
 		<TELL
-"You don't have enough leverage to turn the T-bar itself.  You might
-cause the whole structure to turn, however." CR>)>>
+"You don't have enough leverage to turn the T-bar. You might be able
+to turn the whole structure, however." CR>)>>
 
 <ROUTINE FLAMING-PIT-F ()
 	 <COND (<VERB? EXAMINE>
@@ -1886,11 +1873,10 @@ You could not possibly turn it or move it." CR>)>>
 		<RTRUE>)
 	       (<AND ,IN-DUNGEON <VERB? OPEN EXAMINE READ>>
 		<TELL
-"The book seems to will itself open to a specific page.  On it is a picture of
-eight small rooms located around a great circle of flame.  All are identical
-save one, which has a bronze door leading to a magnificent room bathed in
-golden light.  A legend beneath the picture says only \"The Dungeon and
-Treasury of Zork.\"" CR>)
+"The book seems to will itself open to a specific page. It shows a picture of
+eight small rooms located around a great circle of flame. All are identical
+save one, which has a bronze door leading to a room bathed in golden light.
+A legend beneath the picture says \"The Dungeon and Treasury of Zork.\"" CR>)
 	       (<VERB? OPEN>
 		<TELL
 "The book can be perused but not left open." CR>)>>
@@ -1933,3 +1919,107 @@ Treasury of Zork.\"" CR>)
 "You should specify which panel you want to push." CR>)
 		      (T <TELL
 "You can't budge it; at least from here." CR>)>)>>
+
+^/L
+
+;"special-cased routines"
+
+;"put GO here, eventually"
+
+<ROUTINE V-DIAGNOSE ()
+	 <TELL <GET ,DIAG ,P-STRENGTH> CR>>
+
+<GLOBAL DIAG <TABLE
+"You are dead."
+"You are very seriously wounded. One more wound would very likely do you in."
+"You are hurt quite badly. One major wound would probably kill you."
+"You have a few wounds, which do not seriously impair your strength."
+"You are wounded lightly. You have a good deal of strength in reserve."
+"You are in perfect health.">>
+
+<ROUTINE JIGS-UP (DESC "OPTIONAL" (PLAYER? <>))
+ 	 #DECL ((DESC) STRING (PLAYER?) <OR ATOM FALSE>)
+ 	 <SETG SWORD-STATE 0>
+	 <SETG P-STRENGTH 5>
+	 <SETG S-STRENGTH 5>
+	 <TELL .DESC CR>
+	 <COND (<NOT <==? ,YEAR ,YEAR-PRESENT>> <QUIT>)>
+	 <COND (<NOT <==? ,ADVENTURER ,WINNER>>
+		<TELL "
+|    ****  The " D ,WINNER " has died  ****
+|
+|">
+		<REMOVE ,WINNER>
+		<SETG WINNER ,ADVENTURER>
+		<SETG HERE <LOC ,WINNER>>
+		<RFATAL>)>
+	 <TELL "
+|    ****  You have died  ****
+|
+|">
+	 <COND (<G? <SETG DEATHS <+ ,DEATHS 1>> 3>
+		<TELL
+"You feel yourself disembodied in a deep blackness. A voice from the void
+speaks:  \"I have waited a long age for you, my friend, but perhaps it has been
+another that I have been seeking. Good night, oh worthy adventurer!\" It is
+the last you hear." CR>
+		<QUIT>)
+	       (T
+		<TELL
+"You find yourself deep within the earth in a barren prison cell.
+Outside the iron-barred window, you can see a great, fiery pit. Flames
+leap up and very nearly sear your flesh. After a while, footfalls can
+be heard in the distance, then closer and closer.... The door swings
+open, and in walks an old man.|
+|
+He is dressed simply in a hood and cloak,
+wearing a few simple jewels, carrying something under one arm, and
+leaning on a wooden staff. A single key, as if to a massive prison cell,
+hangs from his belt.|
+|
+He raises the staff toward you and you hear
+him speak, as if in a dream: \"I await you, though your journey be long
+and full of peril. Go then, and let me not wait long!\" You feel some
+great power well up inside you and you fall to the floor. The next
+moment, you are awakening, as if from a deep slumber." CR>)>
+	 <MOVE ,CURRENT-LAMP ,ZORK2-STAIR>
+	 <COND (<AND <IN? ,KEY ,WINNER>
+		     <OR <EQUAL? ,HERE ,DARK-1 ,DARK-2 ,KEY-ROOM>
+			 <EQUAL? ,HERE ,AQ-1 ,AQ-2>>>
+		<MOVE ,KEY ,KEY-ROOM>)>
+	 <CRLF>
+	 <GOTO ,ZORK2-STAIR>
+	 <SETG P-CONT <>>
+	 <RANDOMIZE-OBJECTS>
+	 <KILL-INTERRUPTS>
+	 <RFATAL>>
+
+<ROUTINE RANDOMIZE-OBJECTS ("AUX" (R <>) F N L)
+	 <SET N <FIRST? ,WINNER>>
+	 <REPEAT ()
+		 <SET F .N>
+		 <COND (<NOT .F> <RETURN>)>
+		 <SET N <NEXT? .F>>
+		 <MOVE .F <RANDOM-ELEMENT ,DEAD-OBJ-LOCS>>>>
+
+<GLOBAL DEAD-OBJ-LOCS
+	<LTABLE JUNCTION CLEARING DAMP-PASSAGE CREEPY-CRAWL TIGHT-SQUEEZE
+		FOGGY-ROOM DEAD-END>>
+
+<ROUTINE KILL-INTERRUPTS ()
+	 <DISABLE <INT I-MAN-LEAVES>>
+	 <DISABLE <INT I-MAN-RETURNS>>
+	 <DISABLE <INT I-VIEW-SNAP>>
+	 <DISABLE <INT I-FOLIN>>
+	 <RTRUE>>
+
+<GLOBAL SCORE-MAX 7>
+
+<ROUTINE V-SCORE ("OPTIONAL" (ASK? T))
+	 #DECL ((ASK?) <OR ATOM FALSE>)
+	 <TELL "Your potential is " N ,SCORE>
+	 <TELL " of a possible " N ,SCORE-MAX ", in ">
+	 <TELL N ,MOVES>
+	 <COND (<1? ,MOVES> <TELL " move.">) (ELSE <TELL " moves.">)>
+	 <CRLF>
+	 ,SCORE>

@@ -68,7 +68,7 @@
 		<CRLF>
 		<COND (<==? ,HERE ,DARK-2>
 		       <TELL
-"The ground continues to slope upwards away from the lake.  You can barely 
+"The ground continues to slope upwards away from the lake. You can barely
 detect a dim light from the east." CR>)>
 		<RETURN <>>)>
 	 <COND (<NOT <FSET? ,HERE ,TOUCHBIT>>
@@ -84,7 +84,7 @@ detect a dim light from the east." CR>)>
 		      (<AND .V? <SET STR <GETP ,HERE ,P?LDESC>>>
 		       <TELL .STR CR>)
 		      (T <APPLY <GETP ,HERE ,P?ACTION> ,M-FLASH>)>
-		<COND (<AND <NOT <==? ,HERE .AV>> <FSET? .AV ,VEHBIT>>
+		<COND (<AND <NOT <==? ,HERE .AV>> <FSET .AV ,VEHBIT>>
 		       <APPLY <GETP .AV ,P?ACTION> ,M-LOOK>)>)>
 	 T>
 
@@ -232,8 +232,9 @@ long description (fdesc or ldesc), otherwise will print short."
 <ROUTINE V-VERSION ("AUX" (CNT 17))
 	 <TELL
 "ZORK III: The Dungeon Master|
-Copyright 1982 by Infocom, Inc.  All rights reserved.|
-ZORK is a trademark of Infocom, Inc.|
+Infocom interactive fiction - a fantasy story|
+Copyright 1982, 1983, 1984 by Infocom, Inc.  All rights reserved.|
+ZORK is a registered trademark of Infocom, Inc.|
 Release ">
 	 <PRINTN <BAND <GET 0 1> *3777*>>
 	 <TELL " / Serial number ">
@@ -293,28 +294,28 @@ Release ">
 |">
 	 <COND (<G? <SETG DEATHS <+ ,DEATHS 1>> 3>
 		<TELL
-"You feel yourself disembodied in a deep blackness.  A voice from the void
+"You feel yourself disembodied in a deep blackness. A voice from the void
 speaks:  \"I have waited a long age for you, my friend, but perhaps it has been
-another that I have been seeking.  Good night, oh worthy adventurer!\" It is
+another that I have been seeking. Good night, oh worthy adventurer!\" It is
 the last you hear." CR>
 		<QUIT>)
 	       (T
 		<TELL
 "You find yourself deep within the earth in a barren prison cell.
-Outside the iron-barred window, you can see a great, fiery pit.  Flames
-leap up and very nearly sear your flesh.  After a while, footfalls can
-be heard in the distance, then closer and closer....  The door swings
+Outside the iron-barred window, you can see a great, fiery pit. Flames
+leap up and very nearly sear your flesh. After a while, footfalls can
+be heard in the distance, then closer and closer.... The door swings
 open, and in walks an old man.|
 |
 He is dressed simply in a hood and cloak,
 wearing a few simple jewels, carrying something under one arm, and
-leaning on a wooden staff.  A single key, as if to a massive prison cell,
+leaning on a wooden staff. A single key, as if to a massive prison cell,
 hangs from his belt.|
 |
 He raises the staff toward you and you hear
 him speak, as if in a dream: \"I await you, though your journey be long
-and full of peril.  Go then, and let me not wait long!\" You feel some
-great power well up inside you and you fall to the floor.  The next
+and full of peril. Go then, and let me not wait long!\" You feel some
+great power well up inside you and you fall to the floor. The next
 moment, you are awakening, as if from a deep slumber." CR>)>
 	 <MOVE ,CURRENT-LAMP ,ZORK2-STAIR>
 	 <COND (<AND <IN? ,KEY ,WINNER>
@@ -339,7 +340,6 @@ moment, you are awakening, as if from a deep slumber." CR>)>
 <GLOBAL DEAD-OBJ-LOCS
 	<LTABLE JUNCTION CLEARING DAMP-PASSAGE CREEPY-CRAWL TIGHT-SQUEEZE
 		FOGGY-ROOM DEAD-END>>
-
 
 <ROUTINE KILL-INTERRUPTS ()
 	 <DISABLE <INT I-MAN-LEAVES>>
@@ -465,7 +465,7 @@ direction." CR>
 
 <ROUTINE V-INVENTORY ()
 	 <COND (<FIRST? ,WINNER> <PRINT-CONT ,WINNER>)
-	       (T <TELL "You are empty handed." CR>)>>
+	       (T <TELL "You are empty-handed." CR>)>>
 
 <GLOBAL INDENTS
 	<TABLE ""
@@ -601,7 +601,7 @@ and both tumble to the ground." CR>
 	       (T <TELL "The " D ,PRSI " refuses it politely." CR>)>>
 
 <ROUTINE V-SGIVE ()
-	 <TELL "FOOOO!!" CR>>
+	 <TELL "Foo!" CR>>
 
 <ROUTINE V-DROP () <COND (<IDROP> <TELL "Dropped." CR>)>>
 
@@ -708,7 +708,7 @@ your problem to the address provided in your documentation." CR>>
 <GLOBAL COPR-NOTICE
 " a transcript of interaction with ZORK III.|
 ZORK is a trademark of Infocom, Inc.|
-Copyright (c) 1982 Infocom, Inc.  All rights reserved.|">
+Copyright (c) 1982 Infocom, Inc. All rights reserved.|">
 
 <ROUTINE V-SCRIPT ()
 	<PUT 0 8 <BOR <GET 0 8> 1>>
@@ -758,9 +758,9 @@ Copyright (c) 1982 Infocom, Inc.  All rights reserved.|">
 	       (ELSE <TELL "You can't turn that off." CR>)>
 	 <RTRUE>>
 
-;<ROUTINE V-$WAIT ()
+<ROUTINE V-$WAIT ()
 	 <COND (<==? ,PRSO ,INTNUM> <V-WAIT <- ,P-NUMBER 1>>)
-	       (T <TELL "Eat shit." CR>)>>
+	       (T <TELL "No." CR>)>>
 
 <ROUTINE V-WAIT ("OPTIONAL" (NUM 3))
 	 #DECL ((NUM) FIX)
@@ -777,7 +777,7 @@ Copyright (c) 1982 Infocom, Inc.  All rights reserved.|">
 	 <COND (<==? ,PRSO ,WATER-CHANNEL> <RFALSE>)
 	       (<FSET? ,PRSO ,VEHBIT>
 		<COND (<FSET? .AV ,VEHBIT>
-		       <TELL "You are already in the " D .AV ", cretin!" CR>)
+		       <TELL "You are already in the " D .AV "!" CR>)
 		      (T <RFALSE>)>)
 	       (T
 		<TELL "I suppose you have a theory on boarding a "
@@ -804,7 +804,7 @@ Copyright (c) 1982 Infocom, Inc.  All rights reserved.|">
 		<MOVE ,WINNER ,HERE>)
 	       (T
 		<TELL
-"You realize, just in time, that getting out here would probably be fatal." CR>
+"You realize that getting out here would be fatal." CR>
 		<RFATAL>)>>
 
 <ROUTINE V-BLAST ()
@@ -842,9 +842,8 @@ Copyright (c) 1982 Infocom, Inc.  All rights reserved.|">
 "There are sinister gurgling noises in the darkness all around you!" CR>)
 			     (<EQUAL? ,HERE ,DARK-1 ,DARK-2>
 			      <JIGS-UP
-"Oh, no! A dozen or more lurking grues attack at once and devour you!
-From the look of things, I would guess that you had interrupted a grue
-convention!">)
+"Oh, no! Dozens of lurking grues attack and devour you! You must have
+stumbled into an authentic grue lair!">)
 			     (ELSE
 			      <JIGS-UP
 "Oh, no! A lurking grue slithered into the room and devoured you!">
@@ -859,7 +858,7 @@ convention!">)
 <ROUTINE V-BACK
 	 ()
 	 <TELL
-"Sorry, my memory isn't that good. You'll have to give a direction." CR>>
+"Sorry, my memory is poor. Please give a direction." CR>>
 
 <ROUTINE PRE-POUR-ON ()
 	 <TELL "You can't pour that on anything." CR>>
@@ -1002,13 +1001,11 @@ probably)." CR>
 
 <GLOBAL HELLOS
 	<LTABLE "Hello."
-	       "Good day."
 	       "Nice weather we've been having lately."
 	       "Goodbye.">>
 
 <GLOBAL WHEEEEE
 	<LTABLE "Very good. Now you can go to the second grade."
-	       "Have you tried hopping around the dungeon, too?"
 	       "Are you enjoying yourself?"
 	       "Wheeeeeeeeee!!!!!"
 	       "Do you expect me to applaud?">>
@@ -1016,8 +1013,8 @@ probably)." CR>
 <GLOBAL JUMPLOSS
 	<LTABLE "You should have looked before you leaped."
 	       "I'm afraid that leap was a bit much for your weak frame."
-	       "In the movies, your life would be passing in front of your eyes."
-	       "Geronimo.....">>
+	       "In the movies, your life would be passing before your eyes."
+	       "Geronimo...">>
 
 <ROUTINE PRE-READ ()
 	 <COND (<NOT ,LIT> <TELL "It is impossible to read in the dark." CR>)
@@ -1111,8 +1108,7 @@ probably)." CR>
 		      "smanship slices the "
 		      D
 		      ,PRSO
-		      " into innumerable
-slivers which evaporate instantaneously."
+		      " into innumerable slivers which blow away."
 		      CR>)
 	       (<NOT <FSET? ,PRSI ,WEAPONBIT>>
 		<TELL
@@ -1205,7 +1201,6 @@ slivers which evaporate instantaneously."
 	<LTABLE
 	 " doesn't seem to work."
 	 " isn't notably helpful."
-	 " doesn't work."
 	 " has no effect.">>
 
 <ROUTINE WORD-TYPE
@@ -1231,7 +1226,7 @@ slivers which evaporate instantaneously."
 
 <ROUTINE V-WIN () <TELL "Naturally!" CR>>
 
-<ROUTINE V-YELL () <TELL "Aarrrrrgggggggghhhhhhhhhhh!" CR>>
+<ROUTINE V-YELL () <TELL "Aarrrrrgggggghhhhhhhhh!" CR>>
 
 <ROUTINE V-PLUG () <TELL "This has no effect." CR>>
 
@@ -1252,11 +1247,8 @@ slivers which evaporate instantaneously."
 		      "."
 		      CR>)
 	       (<AND <FSET? ,PRSO ,OPENBIT> <FIRST? ,PRSO>>
-		<REPEAT ()
-			<COND (<SET X <FIRST? ,PRSO>> <MOVE .X ,HERE>)
-			      (ELSE <RETURN>)>>
-	        <TELL "All of the objects spill onto the floor." CR>)
-	       (T <TELL "There's nothing in the " D ,PRSO "." CR>)>>
+		<TELL "Shaking the " D ,PRSO " isn't very useful." CR>)
+	       (T <TELL "Shaking the " D ,PRSO " proves uninteresting." CR>)>>
 
 <ROUTINE PRE-DIG
 	 ()
@@ -1279,7 +1271,7 @@ slivers which evaporate instantaneously."
 		<TELL "What do you think you're doing?" CR>)
 	       (<==? ,HERE ,FLATHEAD-OCEAN>
 		<TELL
-"Between the rocks, wind, and waves, you wouldn't last a minute!" CR>)
+"Between the rocks and waves, you wouldn't last a minute!" CR>)
 	       (T <TELL "Go jump in a lake!" CR>)>>
 
 <ROUTINE V-UNTIE () <TELL "This cannot be tied, so it cannot be untied!" CR>>
@@ -1356,7 +1348,7 @@ slivers which evaporate instantaneously."
 <ROUTINE V-COUNT ("AUX" OBJS CNT)
     #DECL ((CNT) FIX)
     <COND (<==? ,PRSO ,BLESSINGS>
-	   <TELL "Well, for one, you are playing ZORK...." CR>)
+	   <TELL "Well, for one, you are playing ZORK..." CR>)
 	  (T
 	   <TELL "You have lost your mind." CR>)>>
 
@@ -1408,9 +1400,14 @@ somewhere." CR>)
 		<TELL "Beats me." CR>)>>
 
 <ROUTINE V-TELL ()
-	 <COND (<FSET? ,PRSO ,VICBIT>
-		<SETG WINNER ,PRSO>
-		<SETG HERE <LOC ,WINNER>>)
+	 <COND (<FSET? ,PRSO ,ACTORBIT>
+		<COND (,P-CONT
+		       <SETG WINNER ,PRSO>
+		       <SETG HERE <LOC ,WINNER>>)
+		      (T
+		       <TELL "The " D ,PRSO
+" pauses for a moment, perhaps thinking that you should re-read
+the manual." CR>)>)
 	       (T
 		<TELL "You can't talk to the " D ,PRSO "!" CR>
 		<SETG QUOTE-FLAG <>>
@@ -1461,7 +1458,7 @@ somewhere." CR>)
 		       <GOTO ,FRONT-DOOR>)
 		      (T
 		       <TELL "Nothing happens." CR>)>)
-	       (<SET V <FIND-IN ,HERE ,VICBIT>>
+	       (<SET V <FIND-IN ,HERE ,ACTORBIT>>
 		<TELL "You must address the " D .V " directly." CR>)
 	       (<==? <GET ,P-LEXV ,P-CONT> ,W?HELLO>
 		<SETG QUOTE-FLAG <>>
@@ -1470,8 +1467,7 @@ somewhere." CR>)
 		<SETG QUOTE-FLAG <>>
 		<SETG P-CONT <>>
 		<TELL
-"Talking to yourself is said to be a sign of impending mental
-collapse." CR>)>>
+"Talking to yourself is a sign of impending mental collapse." CR>)>>
 
 <ROUTINE V-INCANT ()
 	 <TELL
@@ -1547,4 +1543,4 @@ collapse." CR>)>>
 	 <TELL "How peculiar!" CR>>
 
 <ROUTINE V-LEAN-ON ()
-	 <TELL "Are you so very tired, then?" CR>>
+	 <TELL "Are you so tired?" CR>>

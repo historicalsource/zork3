@@ -1,6 +1,6 @@
-;"Copyright 1982 by Infocom, Inc."
+"Copyright 1982 by Infocom, Inc."
 
-;"Incredibly bizarre Time Machine Problem"
+"Incredibly bizarre Time Machine Problem"
 
 <OBJECT VOICES
 	(IN GLOBAL-OBJECTS)
@@ -24,10 +24,10 @@
       (DESC "Crystal Grotto")
       (LDESC
 "This is a chamber of breathtaking beauty. Mighty stalagmites form
-structured shapes of rock, encrusted with crystalline formations.
-Phosphorescent mosses, fed by a trickle of water from some unseen source
-above, make the crystals glow and sparkle with every color of the rainbow.
-There is an opening to the west, and a man-made passage heads south.")
+crystalline-encrusted rock formations. Phosphorescent mosses, fed by
+a trickle of water from above, make the crystals glow and sparkle with
+every color of the rainbow. There is an opening to the west, and a
+man-made passage heads south.")
       (SOUTH TO WIDE-HALL)
       (WEST TO TIGHT-SQUEEZE)
       (GLOBAL MOSS CRYSTALS)
@@ -43,8 +43,8 @@ There is an opening to the west, and a man-made passage heads south.")
       (IN ROOMS)
       (DESC "Royal Hall")
       (LDESC
-"This is the north end of a large hall with a vaulted ceiling.  A long, tiled
-hallway leads north through a tall arch.  Although the origin or purpose of
+"This is the north end of a large hall with a vaulted ceiling. A long, tiled
+hallway leads north through a tall arch. Although the purpose of
 this room is unclear, there is a large rendering of the Royal Seal of Lord
 Dimwit Flathead carved on the wall.")
       (NORTH TO ROCKY-ROOM)
@@ -59,7 +59,7 @@ Dimwit Flathead carved on the wall.")
 	(FLAGS NDESCBIT READBIT)
 	(TEXT
 "The Seal is vintage Flathead, with signs of excess nearly everywhere.
-It consists of a curiously flat-headed figure wearing a gaudy crown,
+It shows a curiously flat-headed figure wearing a gaudy crown,
 surrounded by the Crown Jewels of the Empire.")> 
 
 <ROOM MUSEUM-ANTE
@@ -339,7 +339,7 @@ surrounded by the Crown Jewels of the Empire.")>
 	 <COND (<VERB? OPEN UNLOCK THROUGH>
 	        <COND (<L? ,YEAR ,YEAR-PRESENT>
 		       <TELL
-"The iron door appears to be locked from the outside." CR>)
+"The iron door is locked from the outside." CR>)
 		      (T
 		       <TELL
 "The iron door is rusted shut and cannot be opened." CR>)>)>>
@@ -353,11 +353,11 @@ surrounded by the Crown Jewels of the Empire.")>
 "You feel a mild tremor from within the earth which passes quickly." CR>)
 	       (T
 		<TELL
-"There is a great tremor from within the earth.  The entire dungeon shakes
-violently and loose debris starts to fall from above you." CR>)>
+"There is a great tremor from within the earth. The entire dungeon shakes
+violently and loose debris falls from above you." CR>)>
 	 <COND (<==? ,HERE ,MUSEUM-ANTE>
 		<TELL
-"To the east, to the right of the great iron door, a large cleft opens up,
+"To the east, next to the great iron door, a cleft opens up,
 revealing an open area behind!" CR>)
 	       (<==? ,HERE ,AQ-VIEW>
 		<TELL
@@ -365,12 +365,10 @@ revealing an open area behind!" CR>)
 of smoke and rubble!" CR>)
 	       (<EQUAL? ,HERE ,AQ-2 ,AQ-3>
 		<TELL
-"The channel beneath your feet trembles.  At once, the channel directly
-to the ">
+"The channel beneath your feet trembles. Then the channel just to the ">
 		<COND (<==? ,HERE ,AQ-2> <TELL "north">)
 		      (T <TELL "south">)>
-		<TELL " of you collapses with its supporting pillar and falls
-into the chasm!" CR>)>
+		<TELL " collapses and falls into the chasm!" CR>)>
 	 <SETG CLEFT-FLAG T>
 	 <FCLEAR ,CLEFT ,INVISIBLE>
 	 <SETG AQ-FLAG <>>
@@ -384,12 +382,12 @@ into the chasm!" CR>)>
 	 <COND (<==? .RARG ,M-LOOK>
 		<COND (,CLEFT-FLAG
 		       <TELL
-"This is the south end of a monumental hall, full of dust and debris from
-a recent earthquake.  To the east is a great iron door, rusted shut.  To its
+"This is the south end of a monumental hall, full of debris from
+a recent earthquake. To the east is a great iron door, rusted shut. To its
 right, however, is a gaping cleft in the rock and behind, a cleared area." CR>)
 		      (T
 		       <TELL
-"You are in the southern half of a monumental hall.  To the east lies
+"You are in the southern half of a monumental hall. To the east lies
 a tremendous iron door which appears to be rusted shut." CR>)>)>>
 		
 <ROUTINE DDESC (STR1 DOOR STR2)
@@ -403,28 +401,28 @@ a tremendous iron door which appears to be rusted shut." CR>)>)>>
 	 <COND (<==? .RARG ,M-LOOK>
 		<COND (<FSET? ,CAGE ,INVISIBLE>
 		       <TELL
-"This seems to be an entrance hall of some sort, judging by the grand iron
+"This is an entrance hall of some sort, judging by the grand iron
 door to the west, and the ornate stone and wooden doors which lead to the east
-and north, respectively.  A few wide steps lead south." CR>)
+and north, respectively. A few wide steps lead south." CR>)
 		      (T
 		       <TELL
 "This is the entrance to the Royal Museum, the finest and grandest in the
-Great Underground Empire.  To the south, down a few steps, is the entrance
+Great Underground Empire. To the south, down a few steps, is the entrance
 to the Royal Puzzle and to the east, through a stone door, is the Royal
-Jewel Collection.  A wooden door to the north is ">
+Jewel Collection. A wooden door to the north is ">
 		      <TELL <COND (<FSET? ,WOODEN-DOOR ,OPENBIT> "open")
 		                  (T "closed")> "
 and leads to the Museum of Technology. ">
 		      <COND (<==? ,YEAR ,YEAR-PRESENT>
 			     <TELL
-"To the west is a great iron door, rusted shut.  To its left, however, is a
-cleft in the rock providing a western route away from the museum." CR>)
+"To the west is a great iron door, rusted shut. To its left, however, is a
+cleft in the rock providing an exit from the museum." CR>)
 			    (<L? ,YEAR ,YEAR-PRESENT>
 			     <TELL
-"To the west is a great iron door, which is rusted shut." CR>)
+"To the west is a great iron door, rusted shut." CR>)
 			    (T
 			     <TELL
-"To the west is a great iron door, rusted shut.  The cleft in the rock,
+"To the west is a great iron door, rusted shut. The cleft in the rock,
 present when you started, has filled in with rubble." CR>)>)>)>>
 
 <GLOBAL TM-YEAR 948>
@@ -433,7 +431,7 @@ present when you started, has filled in with rubble." CR>)>)>)>>
 	 <COND (<==? .RARG ,M-OBJDESC>
 		<TELL
 "Directly in front of you is a large golden machine, which has a seat with a
-console in front.  On the console is a single button and a dial connected to
+console in front. On the console is a single button and a dial connected to
 a three-digit display which reads " N ,TM-YEAR
 ". The machine is suprisingly shiny and shows few signs of age." CR>)
 	       (<AND <==? .RARG ,M-END> <VERB? PUT> <==? ,PRSI ,TIME-MACHINE>>
@@ -447,13 +445,14 @@ a three-digit display which reads " N ,TM-YEAR
 		     <==? ,PRSO ,TIME-MACHINE>>
 		<TELL "That would be a good trick from inside it." CR>)
 	       (<AND <==? .RARG ,M-END> <==? ,PRSO ,TIME-MACHINE>>
-		<COND (<VERB? EXAMINE>
+		<COND (<VERB? OPEN CLOSE>
+		       <TELL "This is a machine, not a box." CR>)
+		      (<VERB? EXAMINE>
 		       <TELL
 "The machine consists of a seat and a console containing one small button
 and a dial connected to a display which reads " N ,TM-YEAR "." CR>)
 		      (<AND <VERB? BOARD> <FIRST? ,TM-SEAT>>
-		       <TELL
-"That will be somewhat uncomfortable!" CR>)
+		       <TELL "That will be somewhat uncomfortable!" CR>)
 		      (<VERB? TAKE RAISE>
 		       <TELL
 "The machine must weigh hundreds of pounds and cannot be carried." CR>)
@@ -535,21 +534,21 @@ of going over the stairs." CR>
 		       <TELL "Nothing seems to have happened." CR>)
 		      (<L? ,TM-YEAR ,YEAR-BUILT>
 		       <REALLY-DEAD
-"You experience a brief period of disorientation. The area around you seems
-to be solidifying! Rock formations close in on you and before you can react
-you are engulfed in stone!">)
+"You experience a period of disorientation. The area around you seems
+to be solidifying! Rock formations close in on you and you become
+engulfed in stone!">)
 		      (<==? ,YEAR ,TM-YEAR>
 		       <TELL "Nothing seems to have happened." CR>)
 		      (<L? ,TM-YEAR ,YEAR-CLOSED>
 		       <TELL
-"You experience a brief period of disorientation.  When your vision returns,">
+"You experience a brief period of disorientation. When your vision returns,">
 		       <COND (<EQUAL? ,HERE ,MUSEUM-ENTRANCE
 				      ,MID-MUSEUM-ENTRANCE
 				      ,OLD-MUSEUM-ENTRANCE>
 			      <COND (<==? ,TM-YEAR ,YEAR-CAGED>
 				     <TELL "
 you are surrounded by a number of heavily armed guards, the dress and
-speech of which seem strange and unfamiliar.  A commotion starts at a door
+speech of which seem strange and unfamiliar. A commotion starts at a door
 to the east and a person with a flat head, wearing a gaudy crown and a purple
 robe, bursts into the room." CR>
 				     <FLATHEAD-SENTENCE>)
@@ -561,31 +560,31 @@ robe, bursts into the room." CR>
 				     <TELL "
 you find yourself in the middle of some kind of ceremony, with a strange
 flat-headed man wearing royal vestments about to break a bottle on the bars
-of an iron cage containing magnificent jewels.  He appears somewhat pleased
+of an iron cage containing magnificent jewels. He appears pleased
 by your presence. ">
 				     <FLATHEAD-SENTENCE>)
 				    (<G? ,TM-YEAR ,YEAR-CAGED>
 				     <GUARDS-KILL>)
 				    (T
-				     <TELL "
-your surroundings appear to have changed.  From outside the door
-you hear the sounds of guards talking." CR>
+				     <TELL ,SURROUNDINGS-CHANGED CR>
 				     <TGOTO ,OLD-JEWEL-ROOM>)>)
 			     (<EQUAL? ,HERE ,TECH-MUSEUM ,MID-TECH-MUSEUM
 				            ,OLD-TECH-MUSEUM>
 			      <COND (<NOT <==? ,TM-YEAR ,YEAR-BUILT>>
 				     <GUARDS-KILL>)
 				    (T
-				     <TELL "
-your surroundings appear to have changed.  From outside the door
-you hear the sounds of guards talking." CR>
+				     <TELL ,SURROUNDINGS-CHANGED CR>
 				     <TGOTO ,OLD-TECH-MUSEUM>)>)>)
 		      (T
 		       <HAPPY-NEW-YEAR>)>)>>
 
+<GLOBAL SURROUNDINGS-CHANGED
+"your surroundings appear to have changed. From outside the door
+you hear the sounds of guards talking.">
+
 <ROUTINE HAPPY-NEW-YEAR ()
 	 <TELL
-"You experience a brief period of disorientation.  When your vision returns,
+"You experience a brief period of disorientation. When your vision returns,
 your surroundings appear somewhat altered." CR>
 	 <COND (<EQUAL? ,HERE ,OLD-JEWEL-ROOM ,MID-JEWEL-ROOM ,JEWEL-ROOM>
 		<COND (<L? ,TM-YEAR ,YEAR-PRESENT> <TGOTO ,MID-JEWEL-ROOM>)
@@ -604,9 +603,8 @@ your surroundings appear somewhat altered." CR>
 		<RFALSE>)>
 	 <SETG TM-YEAR ,YEAR-PRESENT>
 	 <TELL
-"You start to feel light-headed and, before you can even think, you become
-completely disoriented.  When you regain your faculties, you realize that
-your surroundings have changed." CR>
+"You start to feel light-headed and quickly become completely disoriented.
+When your head clears, you realize that your surroundings have changed." CR>
 	 <TGOTO ,SNAP-LOC T>>
 
 <ROUTINE MOVE-JEWELS ()
@@ -726,39 +724,38 @@ it, everything you were holding has vanished too">)
 	 <COND (<OR .MFLG .WFLG> <TELL "!" CR>)>>
 
 <ROUTINE GUARDS-KILL ()
-	 <TELL <PICK-ONE ,GUARD-KILLERS> CR>
+	 <TELL <RANDOM-ELEMENT ,GUARD-KILLERS> CR>
 	 <REALLY-DEAD " ">>
 
 <GLOBAL GUARD-KILLERS <LTABLE
 "
 you are surrounded by heavily armed guards who seem awed by your presence.
-One, whose IQ could not possibly be above 15, aims a strange waffle-like
+One, whose IQ might be 15, aims a strange waffle-like
 instrument in your direction and all goes black."
 "
-you are confronted with a goodly number of particularly stupid-looking
-people dressed in peculiar uniform and pointing waffle-like objects in
-your general direction.  One twists his waffle and you slump
+you are confronted with many particularly stupid-looking
+people dressed in peculiar uniforms and pointing waffle-like objects in
+your direction. One twists his waffle and you slump
 to the ground, dead."
 "
-you see before you a row of military people who, if appearances do not
-deceive, have the cumulative intelligence of a not yet ripe grapefruit.  One
+you see a row of military people who, if appearances do not
+deceive, have the cumulative intelligence of an unripe grapefruit. One
 of them aims a waffle-shaped implement in your direction and you become numb
 and then paralyzed and then dead.">>
 
 <ROUTINE FLATHEAD-SENTENCE ()
-	 <REALLY-DEAD "He speaks very loudly,
-nearly deafening the poor civil servant whose duty it is to see that
-his wishes are carried out. \"Aha! A thief! Didn't I tell you that
-we needed more security! But, no! You all said my idea to build the museum
-under two miles of mountain and surrounded by five hundred feet of steel was
-impractical! Now, what to do with this ... intruder? I have it! We'll build a
-tremendous fortress on the highest mountain peak, with one narrow ladder
-stretching thousands of feet to the pinnacle. There he will stay for the rest
-of his life!\" His brow-beaten assistant hesitates. \"Don't you think, Your
-Lordship, that your plan is a bit, well, a bit much?\" Flathead gives it a
-second's thought. \"No, not really.\" he says, and you are led away.  A few
-years later, your prison is finished.  You are taken there, and spend
-the rest of your life in misery.">>
+	 <REALLY-DEAD "He speaks loudly, nearly deafening the poor civil
+servant whose duty it is to see that his wishes are carried out. \"Aha! A
+thief! Didn't I tell you that we needed more security! But, no! You all
+said my idea to build the museum under two miles of mountain and surrounded
+by five hundred feet of steel was impractical! Now, what to do with this ...
+intruder? I have it! We'll build a tremendous fortress on the highest mountain
+peak, with one narrow ladder stretching thousands of feet to the pinnacle.
+There he will stay for the rest of his life!\" His brow-beaten assistant
+hesitates. \"Don't you think, Your Lordship, that your plan is a bit, well,
+a bit much?\" Flathead gives it a second's thought. \"No, not really.\" he
+says, and you are led away. A few years later, your prison is finished. You
+are taken there, and spend the rest of your life in misery.">>
 
 <ROUTINE REALLY-DEAD (STR)
 	 <TELL .STR CR "||
@@ -779,15 +776,14 @@ the rest of your life in misery.">>
 <ROUTINE HEAR-FLATHEAD ()
 	 <SETG FLATHEAD-HEARD T>
 	 <TELL
-"One particularly loud and grating voice can now be heard above the
+"One particularly loud and grating voice can be heard above the
 others outside the room. \"Very nice! Very nice! Not enough security, but
-very nice! Now, Lord Feepness, pay attention! I've been thinking and what
+very nice! Now, Lord Feepness, pay attention! I've been thinking that what
 we need is a dam, a tremendous dam to control the Frigid River, with
-thousands of gates. Yes! I can see it now. We shall call it ... Flood
-Control Dam #2. No, not quite right. Aha! It will be Flood Control
-Dam #3.\" \"Pardon me, my Lord, but wouldn't that be just a tad excessive?\"
-\"Nonsense! Now, let me tell you my idea for hollowing out volcanoes...\" With
-that, the voices trail out into nothingness." CR>>
+thousands of gates. We shall call it ... Flood Control Dam #2. No, not
+quite right. Aha! Flood Control Dam #3.\" \"Pardon me, my Lord, but wouldn't
+that be just a tad excessive?\" \"Nonsense! Now, let me tell you my idea for
+hollowing out volcanoes...\" With that, the voices trail out nothingness." CR>>
 
 <ROUTINE OLD-TECH-MUSEUM-F (RARG)
 	 <COND (<AND <==? .RARG ,M-LOOK> <==? ,HERE ,OLD-JEWEL-ROOM>>
@@ -807,9 +803,7 @@ the royal sceptre.">
 		<TELL "
 The room is, by appearances, unfinished." CR>
 		<COND (,GUARDS-PRESENT
-		       <TELL
-"Through the door you can hear voices which, from their
-sound, belong to military or police personnel." CR>)>
+		       <TELL ,HEAR-VOICES CR>)>
 		<RTRUE>)
 	       (<==? .RARG ,M-LOOK>
 		<COND (<==? ,HERE ,OLD-TECH-MUSEUM>
@@ -818,13 +812,11 @@ sound, belong to military or police personnel." CR>)>
 part of the Royal Museum." CR>)
 		      (T
 		       <TELL
-"This appears to be an unfinished entranceway to the Royal Museum.  There are
-doors to the east and north, and a blind stairway to the south.  A heavy iron
+"This appears to be an unfinished entranceway to the Royal Museum. There are
+doors to the east and north, and a blind stairway to the south. A heavy iron
 door to the west is closed and locked." CR>)>
 		<COND (,GUARDS-PRESENT
-		       <TELL
-"Through the door you can hear voices which, from their
-sound, belong to military or police personnel." CR>)>
+		       <TELL ,HEAR-VOICES CR>)>
 		<RTRUE>)
 	       (<AND <==? .RARG ,M-END>
 		     <NOT ,FLATHEAD-HEARD>
@@ -839,22 +831,26 @@ sound, belong to military or police personnel." CR>)>
 		     ,GUARDS-PRESENT>
 		<TELL
 "You open the door ever so slightly and see dozens of armed officials.
-You shut the door quickly and quietly, realizing that you would be killed
+You shut the door quickly, realizing that you would be killed
 in an instant if you left the room." CR>)
 	       (<AND <==? .RARG ,M-BEG> ,GUARDS-PRESENT <PROB 3>>
 		<GUARD-CAUGHT>)>>
 
+<GLOBAL HEAR-VOICES
+"Through the door you can hear voices which, from their
+sound, belong to military or police personnel.">
+
 <ROUTINE I-GUARDS-LEAVE ()
 	 <SETG GUARDS-PRESENT <>>
 	 <TELL
-"You hear, from outside the door, guards marching away, their voices fading. 
+"You hear, from outside the door, guards marching away, their voices fading.
 After a few moments, a booming crash signals the close of what must be a
 tremendous door. Then there is silence." CR>>
 
 <ROUTINE GUARD-CAUGHT ()
 	 <REALLY-DEAD
-"A particularly vicious-looking guard enters the room and eyes you.
-He grinds his teeth in a most unpleasant way, pulls a waffle out of his
+"A particularly vicious-looking guard enters the room and sees you.
+He grinds his teeth unpleasantly, pulls a waffle out of his
 garment, and vaporizes you with a flick of his finger.">>
 
 <OBJECT ROBOT
@@ -865,7 +861,7 @@ garment, and vaporizes you with a flick of his finger.">>
 
 <ROUTINE ROBOT-F ()
 	 <COND (<VERB? FOLLOW>
-		<TELL "It moved very quickly and left the door closed." CR>)
+		<TELL "It moved quickly and left the door closed." CR>)
 	       (T <TELL "There is no robot here." CR>)>>
 
 <ROUTINE JEWEL-ROOM-F (RARG)
@@ -873,11 +869,11 @@ garment, and vaporizes you with a flick of his finger.">>
 		     <IN? ,TIME-MACHINE ,HERE>
 		     <PROB 4>>
 		<TELL
-"An odd robot-like device glides into the room, dusting the floor as it
-moves.  Its head gyrates briefly as it scans the machine. \"Shame. Shame,\"
+"An odd robot-like device glides in, dusting the floor as it moves. Its
+head gyrates briefly as it scans the machine. \"Shame. Shame,\"
 it says, rather tinnily. \"Someone has been tampering with the machines
 again.\" Six beady mechanical eyes focus on you as the robot picks up the
-gold machine. \"Hands off, adventurer!\" are its last words as it leaves the
+gold machine. \"Hands off, adventurer!\" it says as it leaves the
 room, closing the door behind it." CR>
 		<FCLEAR ,JEWEL-DOOR ,OPENBIT>
 		<FCLEAR ,WOODEN-DOOR ,OPENBIT>
@@ -887,14 +883,14 @@ room, closing the door behind it." CR>
 "You are in a high-ceilinged chamber">
 		<COND (<NOT <FSET? ,CAGE ,INVISIBLE>>
 		       <TELL " in the middle of which
-sits a tall, round steel cage, which is securely locked.  In the
+sits a tall, round steel cage, which is securely locked. In the
 middle of the cage is a pedestal on which sit the Crown Jewels
 of the Great Underground Empire: a sceptre, a jewelled knife, and a golden
-ring.  A small bronze plaque, now tarnished, is on the cage." CR>)
+ring. A small bronze plaque, now tarnished, is on the cage." CR>)
 		      (T
-		       <TELL " in the middle of which
-is a bare pedestal.  The room is unfinished with no
-indication of its purpose.  A small plaque is fastened to a wall."  CR>)>)>>
+		       <TELL " in the middle of which is a bare
+pedestal. The room is unfinished with no
+indication of its purpose. A small plaque is fastened to a wall." CR>)>)>>
 
 ;"You can take the jewels in YEAR-BUILT; otherwise, it is enclosed.
   If you take it, YEAR-CLOSED is updated to YEAR-CAGED (history changes)"
@@ -923,12 +919,12 @@ indication of its purpose.  A small plaque is fastened to a wall."  CR>)>)>>
 	 <COND (<==? .RARG ,M-LOOK>
 		<COND (<FSET? ,CAGE ,INVISIBLE>
 		       <DDESC
-"This is an exhibit of Empire technology.  A wooden door to the
+"This is an exhibit of Empire technology. A wooden door to the
 south is " ,WOODEN-DOOR ".">)
 		      (T
 		       <DDESC
 "This is a large hall which hosted the technological exhibits of the
-Great Underground Empire.  A door to the south is "
+Great Underground Empire. A door to the south is "
 ,WOODEN-DOOR ".">)>)>>
 		      
 <ROUTINE PLAQUE-F ()
@@ -936,14 +932,14 @@ Great Underground Empire.  A door to the south is "
 		<COND (,RING-STOLEN
 		       <TELL
 "The plaque explains that this room was to be the home of the Crown Jewels
-of the Great Underground Empire. However, following the unexplained
-disappearance of a priceless ring during the final stages of construction,
-Lord Flathead decided to place the remaining jewels in a safer location. 
-Interestingly enough, he distrusted museum security enough to place his prized
-possesion, an incredibly gaudy crown, within a locked safe in a volcano
-specifically hollowed out for that purpose." CR>
+of the Empire. However, following the unexplained disappearance of a
+priceless ring during the final stages of construction, Lord Flathead
+decided to place the remaining jewels in a safer location.
+Interestingly, he placed his most prized possesion, an incredibly gaudy
+crown, in a locked safe in a volcano specifically hollowed out for that
+purpose." CR>
 		       <RTRUE>)>
-		<PUT 0 8 <BOR <GET 0 8> 2>>
+		<FIXED-FONT-ON>
 		<TELL
 "|
          Crown Jewels|
@@ -957,19 +953,19 @@ specifically hollowed out for that purpose." CR>
           Dedicated|
          * 777 GUE *|
 |">
-		<PUT 0 8 <BAND <GET 0 8> -3>>
+		<FIXED-FONT-OFF>
 		<COND (,CLUMSY-ROBBERY
 		       <TELL
 "Underneath the plaque, in small lettering, is a description of a clumsy
-attempt to steal the jewels using a time travel device from the Technological
+attempt to steal the jewels using a time machine from the Technological
 Museum which the curators were surprised to discover was not a non-working
-model.  After the attempt, the machine was removed from the exhibit." CR>)
+model. After the attempt, the machine was removed from the exhibit." CR>)
 		      (,MYSTERY
 		       <TELL
 "Underneath the plaque, in small lettering, is a description of
 a mysterious happening during the final stages of construction of
 the Museum, in which some of the crown jewels were found displaced
-from their proper positions.  Fortunately, nothing was missing.
+from their proper positions. Fortunately, nothing was missing.
 The mystery was never solved and the museum was opened despite the objections
 of Lord Flathead that security was too lax." CR>)>
 		<RTRUE>)>>
@@ -1006,9 +1002,9 @@ of Lord Flathead that security was too lax." CR>)>
 	 <COND (<AND ,GUARDS-PRESENT <==? ,YEAR ,YEAR-BUILT>>
 		<TELL
 "The voices are muffled by the door which (fortunately for you) separates
-you.  They seem to be in heated debate on the topic of
+you. They seem to be in heated debate on the topic of
 ">
-		<TELL <PICK-ONE ,BLATHER> "." CR>)
+		<TELL <RANDOM-ELEMENT ,BLATHER> "." CR>)
 	       (T <TELL "Are you hearing things now?" CR>)>>
 
 <GLOBAL BLATHER
@@ -1016,7 +1012,7 @@ you.  They seem to be in heated debate on the topic of
 		"the excessive nature of the Royal Government"
 		"the soon to be constructed Royal Puzzle"
 		"the proper way to execute trespassers"
-		"torture as the preferred punishment for thieves"
+		"torturing thieves"
 		"the banishment of the Wizard of Frobozz">>
 
 <ROUTINE MUSEUM-PIECES ("OPTIONAL" (RARG <>))
@@ -1025,15 +1021,15 @@ you.  They seem to be in heated debate on the topic of
 		       <RTRUE>)>
 		<TELL
 "A strange grey machine, shaped somewhat like a clothes dryer, is on one side
-of the room.  On the other side of the hall is a powerful-looking black
+of the room. On the other side of the hall is a powerful-looking black
 machine, a tight tangle of wires, pipes, and motors.|
 A plaque is mounted near the door.">
 		<COND (<L? ,YEAR ,YEAR-CLOSED>
 		       <TELL
 " The grey machine, it turns out, is a Frobozz
-Magic Pressurizer, used in the coal mines of the Empire.  The black machine is
-a Frobozz Magic Room Spinner.  The golden machine is referred to as a
-Temporizer.  All are non-working models donated by Frobozzco president John
+Magic Pressurizer, used in the coal mines of the Empire. The black machine is
+a Frobozz Magic Room Spinner. The golden machine is referred to as a
+Temporizer. All are non-working models donated by Frobozzco president John
 D. Flathead." CR>)
 		      (T <TELL
 " The writing is faded, however, and cannot be
@@ -1055,7 +1051,7 @@ spots." CR>)>)
 	       (<VERB? EXAMINE READ>
 		<COND (<L? ,YEAR ,YEAR-CLOSED>
 		       <TELL
-"The plaque merely identifies the machines and names their donor.  They are
+"The plaque merely identifies the machines and names their donor. They are
 non-working models of existing state-of-the-art machinery." CR>)
 		      (T <TELL "The words cannot be made out." CR>)>)>>
 

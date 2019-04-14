@@ -1,3 +1,9 @@
+"PARSER for
+		     Zork III: The Dungeon Master 
+		 The Great Underground Empire (Part 3)
+	(c) Copyright 1982 Infocom, Inc.  All Rights Reserved.
+"
+
 "Parser global variable convention:  All parser globals will 
   begin with 'P-'.  Local variables are not restricted in any
   way.
@@ -163,10 +169,10 @@
 			      <PUT ,P-ITBL ,P-VERB ,ACT?TELL>
 			      <PUT ,P-ITBL ,P-VERBN 0>
 			      <SET WRD ,W?QUOTE>)>
-		       <COND ;(<AND <EQUAL? .WRD ,W?PERIOD>
+		       <COND ;(<AND <EQUAL? .WRD ,W?.>
 				   <EQUAL? .LW ,W?MRS ,W?MR ,W?MS>>
 			      <SET LW 0>)
-			     (<OR <EQUAL? .WRD ,W?THEN ,W?PERIOD>
+			     (<OR <EQUAL? .WRD ,W?THEN ,W?.>
 				  <EQUAL? .WRD ,W?QUOTE>> 
 			      <COND (<EQUAL? .WRD ,W?QUOTE>
 				     <COND (,QUOTE-FLAG
@@ -187,7 +193,7 @@
 						     <GET ,P-LEXV
 							  <+ .PTR ,P-LEXELEN>>>
 					            ,W?THEN
-					            ,W?PERIOD
+					            ,W?.
 					            ,W?QUOTE>
 					    <NOT <L? .LEN 2>>>
 				       <AND ,QUOTE-FLAG
@@ -230,7 +236,7 @@
 				    (<AND <NOT <0? .VAL>>
 				          <OR <0? ,P-LEN>
 					      <EQUAL? <GET ,P-LEXV <+ .PTR 2>>
-						      ,W?THEN ,W?PERIOD>>>
+						      ,W?THEN ,W?.>>>
 				     <COND (<L? ,P-NCN 2>
 					    <PUT ,P-ITBL ,P-PREP1 .VAL>
 					    <PUT ,P-ITBL ,P-PREP1N .WRD>)>)
@@ -250,6 +256,11 @@
 					        ,W?BRIEFLY>>
 			      <SETG P-ADVERB .WRD>)
 			     (<WT? .WRD ,PS?BUZZ-WORD>)
+			     (<AND <EQUAL? .VERB ,ACT?TELL>
+				   <WT? .WRD ,PS?VERB ,P1?VERB>>
+			      <TELL
+"Please consult your manual for the correct way to talk to other people
+or creatures." CR>)
 			     (T
 			      <CANT-USE .PTR>
 			      <RFALSE>)>)
@@ -311,7 +322,7 @@
 				   <==? <GET ,P-ITBL ,P-VERB> ,ACT?ACCUSE>>
 			      <PUT ,P-LEXV .PTR ,W?WITH>
 			      <SET WRD ,W?WITH>)>
-		       <COND ;(<AND <EQUAL? .WRD ,W?PERIOD>
+		       <COND ;(<AND <EQUAL? .WRD ,W?.>
 				   <EQUAL? .LW ,W?MRS ,W?MR ,W?MS>>
 			      <SET LW 0>)
 			     (<EQUAL? .WRD ,W?AND ,W?COMMA> <SET ANDFLG T>)
@@ -319,7 +330,7 @@
 			      <COND (<==? .NW ,W?OF>
 				     <SETG P-LEN <- ,P-LEN 1>>
 				     <SET PTR <+ .PTR ,P-LEXELEN>>)>)
-			     (<OR <EQUAL? .WRD ,W?THEN ,W?PERIOD>
+			     (<OR <EQUAL? .WRD ,W?THEN ,W?.>
 				  <AND <WT? .WRD ,PS?PREPOSITION>
 				       <NOT .FIRST??>>>
 			      <SETG P-LEN <+ ,P-LEN 1>>
@@ -460,9 +471,6 @@
 
 <ROUTINE UNKNOWN-WORD (PTR "AUX" BUF) 
 	#DECL ((PTR BUF) FIX)
-	<COND (<VERB? SAY>
-	       <TELL "Nothing happens." CR>
-	       <RFALSE>)>
 	<TELL "I don't know the word \"">
 	<WORD-PRINT <GETB <REST ,P-LEXV <SET BUF <* .PTR 2>>> 2>
 		    <GETB <REST ,P-LEXV .BUF> 3>>
@@ -472,9 +480,6 @@
 
 <ROUTINE CANT-USE (PTR "AUX" BUF) 
 	#DECL ((PTR BUF) FIX)
-	<COND (<VERB? SAY>
-	       <TELL "Nothing happens." CR>
-	       <RFALSE>)>
 	<TELL "You used the word \"">
 	<WORD-PRINT <GETB <REST ,P-LEXV <SET BUF <* .PTR 2>>> 2>
 		    <GETB <REST ,P-LEXV .BUF> 3>>
@@ -535,7 +540,8 @@
 		<COND (<DLESS? LEN 1>
 		       <COND (<OR .DRIVE1 .DRIVE2> <RETURN>)
 			     (T
-			      <TELL "That sentence isn't one I recognize." CR>
+			      <TELL
+"That sentence isn't one I recognize." CR>
 			      <RFALSE>)>)
 		      (T <SET SYN <REST .SYN ,P-SYNLEN>>)>>
 	<COND (<AND .DRIVE1
@@ -601,8 +607,7 @@
 		      (T
 		       <COND (.NOSP <SET NOSP <>>)
 			     (T <TELL " ">)>
-		       <COND (<==? <SET WRD <GET .BEG 0>> ,W?PERIOD>
-			      <SET NOSP T>)
+		       <COND (<==? <SET WRD <GET .BEG 0>> ,W?.> <SET NOSP T>)
 			     (T
 			      <COND (<AND .FIRST?? <NOT .PN> .CP>
 				     <TELL "the ">)>
@@ -845,8 +850,8 @@
 		    <NOT <==? ,P-GETFLAGS ,P-ALL>>
 		    <0? ,P-GWIMBIT>>
 	       <COND (.VRB
-		      <TELL
-"There seems to be a noun missing in that sentence!" CR>)>
+		      <TELL 
+"There seems to be a noun missing in that sentence!"  CR>)>
 	       <RFALSE>)>
 	<COND (<OR <NOT <==? ,P-GETFLAGS ,P-ALL>> <0? ,P-SLOCBITS>>
 	       <SETG P-SLOCBITS -1>)>
@@ -890,7 +895,7 @@
 				   <SETG P-OFLAG T>)
 				  (.VRB
 				   <TELL
-"There seems to be a noun missing in that sentence!" CR>)>
+"There seems to be a verb missing in that sentence." CR>)>
 			    <SETG P-NAM <>>
 			    <SETG P-ADJ <>>
 			    <RFALSE>)>)
@@ -1061,16 +1066,16 @@
 		    <NOT <BTST <GETB ,P-SYNTAX ,P-SLOC2> ,SMANY>>>
 	       <SET LOSS 2>)>
 	<COND (.LOSS
-	       <TELL "You can't use multiple ">
+	       <TELL "I can't use multiple ">
 	       <COND (<==? .LOSS 2> <TELL "in">)>
-	       <TELL "direct objects with \"">
+	       <TELL "direct objects with '">
 	       <SET TMP <GET ,P-ITBL ,P-VERBN>>
 	       <COND (<0? .TMP> <TELL "tell">)
-		     (<OR ,P-OFLAG ,P-MERGED>
+		     (,P-OFLAG
 		      <PRINTB <GET .TMP 0>>)
 		     (T
 		      <WORD-PRINT <GETB .TMP 2> <GETB .TMP 3>>)>
-	       <TELL "\"." CR>
+	       <TELL "'." CR>
 	       <RFALSE>)
 	      (T)>>  
  
@@ -1116,20 +1121,3 @@
 		    <==? <GET <SET PTR <GET ,P-ITBL ,P-NC2>> 0> ,W?IT>>
 		<TELL " " D ,PRSO>)
 	       (T <BUFFER-PRINT .PTR <GET ,P-ITBL ,P-NC2L> <>>)>>
-
-"former CRUFTY routine, re-written by SWG"
-
-<ROUTINE THIS-IT? (OBJ TBL "AUX" SYNS) 
- <COND (<FSET? .OBJ ,INVISIBLE> <RFALSE>)
-       (<AND ,P-NAM
-	     <NOT <ZMEMQ ,P-NAM
-			 <SET SYNS <GETPT .OBJ ,P?SYNONYM>>
-			 <- </ <PTSIZE .SYNS> 2> 1>>>>
-	<RFALSE>)
-       (<AND ,P-ADJ
-	     <OR <NOT <SET SYNS <GETPT .OBJ ,P?ADJECTIVE>>>
-		 <NOT <ZMEMQB ,P-ADJ .SYNS <- <PTSIZE .SYNS> 1>>>>>
-	<RFALSE>)
-       (<AND <NOT <0? ,P-GWIMBIT>> <NOT <FSET? .OBJ ,P-GWIMBIT>>>
-	<RFALSE>)>
- <RTRUE>>
